@@ -1,0 +1,56 @@
+@import "var";
+
+
+// 导航部分
+.navbar {
+    padding: 1rem 0px;
+    display: flex;
+    justify-content: center;
+}
+.navCenter {
+    display: flex;
+    justify-content: space-between;
+}
+.navRight {
+    display: flex;
+    justify-content: flex-end;
+}
+.navRight li {
+    height: 1rem;
+    line-height: 1rem;
+    margin-left: 20px;
+}
+.navLeft {
+    font-weight: 900;
+}
+.navLeft>span {
+    color: $font000;
+    margin-right: 10px;
+}
+.navLeft>span+span {
+    color: $fontBlue;
+}
+
+//轮播部分
+
+
+//分区部分
+.showZone {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.showZone ul {
+    display: flex;
+    justify-content: space-between;
+}
+.showZone ul li {
+    width: 20%;
+    height: 228px;
+    padding: 20px;
+}
+.line {
+    border: 2px solid $fontBlue;
+    width: 3rem;
+    height: 1px;
+}
