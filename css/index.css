@@ -8,7 +8,10 @@
   .showZone ul {
     flex-wrap: nowrap; }
   .showZone ul li {
-    width: 20% !important; } }
+    width: 20% !important; }
+  .content-item-detail, .content-item-img {
+    width: 50%;
+    padding: 0px 1rem; } }
 
 /**
  *小屏 中屏 的显示样式
@@ -28,7 +31,12 @@
   .showZone ul {
     justify-content: space-around !important; }
   .showZone ul li {
-    width: 40%; } }
+    width: 40%; }
+  .content-item-detail {
+    width: 100%;
+    padding: 0px 1rem; }
+  .content-item-img {
+    display: none; } }
 
 /**
  *超小屏的显示样式
@@ -46,7 +54,12 @@
   .navRight a {
     color: white; }
   .showZone ul li {
-    width: 100%; } }
+    width: 100%; }
+  .content-item-detail {
+    width: 100%;
+    padding: 0px 1rem; }
+  .content-item-img {
+    display: none; } }
 
 /**
  *导航部分
@@ -124,3 +137,80 @@
 
 .fa-home, .fa-cubes, .fa-heart-o, .fa-calendar {
   margin-bottom: 1rem; }
+
+/**
+*图文展示部分
+*/
+.articleShow {
+  padding: 3rem 0px;
+  display: flex;
+  justify-content: center; }
+
+.content {
+  width: 65%; }
+
+.content > h3 {
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #2b2b2b;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 2px 2px 2px rgba(41, 41, 41, 0.26);
+  letter-spacing: 1px; }
+
+.content > span {
+  display: inline-block;
+  width: 100%;
+  font-weight: 500;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #ff9900;
+  text-shadow: 1px 1px 3px #d19d23;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem; }
+
+.content-item {
+  display: flex;
+  flex-wrap: nowrap; }
+
+:not(.content > .content-item), :not(.content > .content-img) {
+  margin-top: 1rem; }
+
+.content-item-detail > h4 {
+  color: #2b2b2b;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem; }
+
+.content-item-detail .line {
+  background-color: #ff9900; }
+
+.content-item-detail > h4, .content-item-detail > .btn {
+  margin: 1.5rem 0px; }
+
+.btn {
+  display: inline-block;
+  height: 1.6rem;
+  line-height: 1.6rem;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: #ff9900;
+  border: 1px solid transparent;
+  padding: 0.375rem 1.1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0px 10px 2.5rem 0px #ccc; }
+
+.content-item-img {
+  overflow: hidden; }
+
+.content-item-img {
+  height: 18rem; }
+
+.content-item-img img {
+  height: 105%; }
+
+.content-item-img:hover img {
+  transition: all 0.5s;
+  transform: translate(-3px, -3px); }

@@ -18,6 +18,14 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	//默认字体设置
+	// font-family: 'Open Sans', sans-serif;
+	color: #7b7d7d;
+}
+//设置p内行高
+p {
+	line-height: 1.7em;
+    letter-spacing: 1px;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

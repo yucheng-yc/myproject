@@ -10,13 +10,19 @@
         display: none !important;
     }
 
-    //分区展示showZone部分
-    //大屏为 4个 
+    //分区展示showZone部分 大屏为 4个 
     .showZone ul {
         flex-wrap: nowrap
     }
     .showZone ul li {
         width: 20% !important;
+    }
+
+
+    //图文展示 大屏时 图片和细节平分
+    .content-item-detail,.content-item-img {
+        width: 50%;
+        padding: 0px 1rem;
     }
 }
 
@@ -44,8 +50,7 @@
         color: white;
     }
 
-    //分区展示showZone部分
-    //中屏一行显示两个 居中
+    //分区展示showZone部分 中屏一行显示两个 居中
     .showZone ul {
         justify-content: space-around !important;
     }
@@ -53,6 +58,16 @@
         width: 40%;
     }
 
+ 
+    //图文展示
+    //中屏时 细节全占 图片隐藏
+    .content-item-detail {
+        width: 100%;
+        padding: 0px 1rem;
+    }
+    .content-item-img {
+        display: none;
+    }
 
 
 }
@@ -86,6 +101,18 @@
     .showZone ul li {
         width: 100%;
     }
+
+     //图文展示
+    //小屏时 细节全占 图片隐藏 同中屏
+    .content-item-detail {
+        width: 100%;
+        padding: 0px 1rem;
+    }
+    .content-item-img {
+        display: none;
+    }
+
+
 }
 
 
@@ -183,4 +210,94 @@
 //字体图标设置
 .fa-home,.fa-cubes,.fa-heart-o,.fa-calendar {
     margin-bottom: 1rem;
+}
+
+
+/**
+*图文展示部分
+*/
+
+
+//设置上下内边距,弹性布局 内容居中
+.articleShow {
+    padding: 3rem 0px;
+    display: flex;
+    justify-content: center;   
+}
+.content {
+    width: 65%;
+}
+//设置 articleShow 下内容标题
+.content>h3 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: #2b2b2b;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 2px rgba(41, 41, 41, 0.26);
+    letter-spacing: 1px;
+}
+//内容content内标题上小文字设置
+.content>span {
+    display: inline-block;
+    width: 100%;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-align: center;
+    color: $fontOrange;
+    text-shadow: 1px 1px 3px rgb(209, 157, 35);
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+}
+//具体内容小块为弹性 尺寸在媒体设置
+    
+.content-item {
+    display: flex;
+    flex-wrap: nowrap;
+}
+//除了第一排 所有项加上边距 1rem
+:not(.content>.content-item),:not(.content>.content-img) {
+    margin-top: 1rem;
+}
+//内容detail内标题设置
+.content-item-detail>h4 {
+    color: #2b2b2b;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+}
+.content-item-detail .line {
+    background-color: $fontOrange;
+}
+.content-item-detail>h4,.content-item-detail>.btn {
+    margin: 1.5rem 0px;
+}
+//按钮绘制
+.btn {
+    display: inline-block;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    background-color: $fontOrange;
+    border: 1px solid transparent;
+    padding: 0.375rem 1.1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0px 10px 2.5rem 0px #ccc; 
+}
+//content-item-img 下的内容设置
+.content-item-img {
+    overflow: hidden;
+}
+.content-item-img {
+    height: 18rem;
+}
+.content-item-img img{
+    height: 105%;
+}
+.content-item-img:hover img {
+    transition: all 0.5s;
+    transform: translate(-3px,-3px);
 }
