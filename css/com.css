@@ -45,32 +45,3 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
-
-.navbar {
-  padding: 1rem 0px;
-  display: flex;
-  justify-content: center; }
-
-.navbar > div {
-  display: flex;
-  justify-content: space-between; }
-
-.navbar > ul li {
-  height: 1rem; }
-
-.navLeft {
-  height: 1rem; }
-
-.navLeft > span {
-  color: #000;
-  margin-right: 10px; }
-
-.navLeft span + span {
-  color: #00a8e0; }
-
-.navRight {
-  background-color: red; }
-
-/*大屏*/
-/*中屏*/
-/*小屏*/

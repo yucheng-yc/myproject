@@ -1,7 +1,97 @@
 @import "var";
 
+/**
+ *大屏 超大屏 的显示样式
+ */
+@media screen and  (min-width: 992px) {
+    
+    //大屏隐藏按钮
+    .list-toggle {
+        display: none !important;
+    }
 
-// 导航部分
+    //分区展示showZone部分
+    //大屏为 4个 
+    .showZone ul {
+        flex-wrap: nowrap
+    }
+    .showZone ul li {
+        width: 20% !important;
+    }
+}
+
+/**
+ *小屏 中屏 的显示样式
+ */
+ @media screen and  (min-width: 576px) and (max-width: 991px) {
+     
+    //小屏中屏 将logo居中，将导航挤到第二行显示
+    .navLeft {
+        width: 85%;
+        text-align: center;
+    }
+    //第二行的细节处理
+    .navRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        //第二行强制占满
+        width: 100% !important;
+        //设置到第二行的颜色变成黑色
+        background-color: rgba(0, 0, 0, 0.81);
+    }
+    .navRight a {
+        color: white;
+    }
+
+    //分区展示showZone部分
+    //中屏一行显示两个 居中
+    .showZone ul {
+        justify-content: space-around !important;
+    }
+    .showZone ul li {
+        width: 40%;
+    }
+
+
+
+}
+
+/**
+ *超小屏的显示样式
+ */
+ @media (max-width: 575px) {
+
+
+    //超小屏与小中屏 导航样式相同部分
+    .navLeft {
+        width: 85%;
+        text-align: center;
+    }
+    .navRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        //第二行强制占满
+        width: 100% !important;
+        //设置到第二行的颜色变成黑色
+        background-color: rgba(0, 0, 0, 0.81);
+    }
+    .navRight a {
+        color: white;
+    }
+
+
+    //分区展示showZone部分
+    .showZone ul li {
+        width: 100%;
+    }
+}
+
+
+/**
+ *导航部分
+ */
 .navbar {
     padding: 1rem 0px;
     display: flex;
@@ -9,48 +99,88 @@
 }
 .navCenter {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    width: 75%;
 }
+//右侧导航
 .navRight {
     display: flex;
     justify-content: flex-end;
+    width: 40%;
 }
+//间距
 .navRight li {
-    height: 1rem;
-    line-height: 1rem;
     margin-left: 20px;
+    color:white;
 }
+//为右侧导航添加hover效果
+.navRight li:hover {
+    border-bottom: 2px solid white;
+}
+//设置行高垂直居中对齐
+.navRight li,.navLeft {
+    height: 3rem;
+    line-height: 3rem; 
+}
+.list-toggle {
+    margin: 10px 0px; 
+}
+//logo加粗 字体变大
 .navLeft {
-    font-weight: 900;
+    font-weight: 800;
+    font-size: 35px;
 }
+//logo 颜色组成
 .navLeft>span {
     color: $font000;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .navLeft>span+span {
     color: $fontBlue;
 }
 
-//轮播部分
 
 
-//分区部分
+
+/**
+ *轮播部分
+ */
+
+.banner {
+    height: 20rem;
+    background-color: $fontOrange;
+}
+
+
+
+
+/**
+ *分区部分
+ */
 .showZone {
-    padding: 2rem;
+    padding: 2rem 0px;
     display: flex;
     justify-content: center;
 }
 .showZone ul {
     display: flex;
+    flex-wrap: wrap;
+    width: 80%;
     justify-content: space-between;
 }
 .showZone ul li {
-    width: 20%;
+    // width: 24%;
     height: 228px;
     padding: 20px;
 }
+//蓝线
 .line {
-    border: 2px solid $fontBlue;
+    border: 1px solid $fontBlue;
     width: 3rem;
-    height: 1px;
+    margin: 1rem 0px;
+}
+//字体图标设置
+.fa-home,.fa-cubes,.fa-heart-o,.fa-calendar {
+    margin-bottom: 1rem;
 }
