@@ -32,11 +32,20 @@
     justify-content: space-around !important; }
   .showZone ul li {
     width: 40%; }
-  .content-item-detail {
-    width: 100%;
-    padding: 0px 1rem; }
+  .content-item {
+    flex-flow: column nowrap; }
   .content-item-img {
-    display: none; } }
+    margin-top: 1rem; }
+  .content-item-img img {
+    width: 100%; }
+  /**
+    *透明背景栏
+    */
+  .transBox {
+    flex-direction: column;
+    justify-content: center; }
+  .transBox div {
+    width: 80% !important; } }
 
 /**
  *超小屏的显示样式
@@ -55,11 +64,12 @@
     color: white; }
   .showZone ul li {
     width: 100%; }
-  .content-item-detail {
-    width: 100%;
-    padding: 0px 1rem; }
+  .content-item {
+    flex-flow: column nowrap; }
   .content-item-img {
-    display: none; } }
+    margin-top: 1rem; }
+  .content-item-img img {
+    width: 100%; } }
 
 /**
  *导航部分
@@ -109,8 +119,11 @@
  *轮播部分
  */
 .banner {
-  height: 20rem;
   background-color: #ff9900; }
+
+.bannerImg {
+  width: 100%;
+  display: block; }
 
 /**
  *分区部分
@@ -173,7 +186,7 @@
   display: flex;
   flex-wrap: nowrap; }
 
-:not(.content > .content-item), :not(.content > .content-img) {
+.content-item:not(.content:first-child) {
   margin-top: 1rem; }
 
 .content-item-detail > h4 {
@@ -181,6 +194,10 @@
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.5rem; }
+
+.content-item-detail {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
 
 .content-item-detail .line {
   background-color: #ff9900; }
@@ -214,3 +231,58 @@
 .content-item-img:hover img {
   transition: all 0.5s;
   transform: translate(-3px, -3px); }
+
+/**
+*透明背景栏
+*/
+.transBg {
+  height: 494px;
+  background: url("../images/g4.jpg") no-repeat fixed bottom right/cover; }
+
+.transBox {
+  background-color: rgba(22, 122, 192, 0.6);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 4.5rem 0px; }
+
+.transBox div {
+  padding: 0px 1rem;
+  height: 356px; }
+
+.transBox div:first-child {
+  width: 186px; }
+
+.transBox div:nth-child(2), .transBox div:last-child {
+  width: 248px; }
+
+.leftFont h5, p {
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 2.3;
+  font-size: 0.85rem; }
+
+.leftFont h5 {
+  font-size: 17px;
+  color: white !important;
+  text-transform: uppercase; }
+
+.leftFont p {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 3rem;
+  word-wrap: wrap;
+  margin-top: 1.18rem;
+  text-transform: uppercase;
+  color: white !important; }
+
+.transBox p {
+  margin-bottom: 1rem; }
+
+/**
+*图片集合
+*/
+.photosBox {
+  height: 300px;
+  background-color: #ff9900; }
