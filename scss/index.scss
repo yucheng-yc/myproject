@@ -183,6 +183,29 @@
         margin-bottom: 0px !important;
     }
 
+    /**
+    *图片集合
+    */
+    //设置图面总盒子的宽度
+    .photosBox .photosItem {
+        flex-direction: column;
+    }
+    //将大盒子分为4个小盒子 每排一个
+    .photosItem div {
+        width: 100% !important;
+        overflow: hidden;
+    }
+    //设置第一个和最后一个盒子 图片缝隙清除
+    .photosItem div:first-child a:last-child {
+        padding-right: 0px !important;
+    }
+    .photosItem div:last-child a:first-child {
+        padding-left: 0px !important;
+    }
+    .photosItem div:nth-child(2) {
+        padding-bottom: 0.5rem !important;
+    }
+
 }
 
 
@@ -425,43 +448,96 @@
 /**
 *图片集合
 */
+//设置图面总盒子居中
 .photosBox {
-    background-color: $fontOrange;
+    // background-color: $fontOrange;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: 5rem 0px;
-    
+    align-items: center;
+    padding: 5rem 0px;   
 }
+.photosBox span ,.carouselItem span{
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.35em;
+    color: #00a8e0;
+    letter-spacing: 4px;
+    margin-bottom: 0.6rem;
+}
+.photosBox h3,.carouselItem h3{
+    line-height: 2rem;
+    text-shadow: 2px 2px 2px rgba(41, 41, 41, 0.26);
+    font-size: 2.5em;
+    color: #2b2b2b;
+    font-weight: 800;
+    margin-bottom: 3.5rem;
+}
+//设置图面总盒子的宽度
 .photosBox .photosItem {
     width: 80%;
     display: flex;
     flex-wrap: wrap;
 }
+//讲大盒子分为4个小盒子 每排2个
 .photosItem div {
     width: 50%;
-    
+    overflow: hidden;
 }
-.photosItem div:first-child  {
-    padding-right: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-.photosItem div:first-child div {
-    display: flex;
-}
-.photosItem div:first-child div:first-child {
-    padding-right: 0.5rem;
-}
-.photosItem div:nth-child(2) {
-    padding-bottom: 0.5rem;
-}
-.photosItem div:last-child {
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
-}
-.photosItem div:last-child div:last-child {
-    padding-left: 0.5rem;
-}
+//设置每个图片占满，同时高度自适应
 .photosItem img {
     width: 100%;
     height: auto;
+}
+//第一个和最后一个盒子 使用弹性布局
+.photosItem div:first-child,.photosItem div:last-child{
+    display: flex;
+    justify-content: space-around;
+}
+//弹性子项宽度对半
+.photosItem div:first-child a,.photosItem div:last-child a{
+    width: 50%;
+    display: block;
+}
+//设置第一个和最后一个盒子 图片缝隙
+.photosItem div:first-child a {
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.photosItem div:last-child a {
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+}
+/*
+*轮播图文区
+*/
+.carouselImgText {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+}
+.carouselImgText .carouselItem {
+    width: 80%;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.imgTextItem {
+    display: flex;
+}
+.imgTextItem div {
+    width: 25%;
+    height: auto;
+    overflow: hidden;
+    padding: 0 1rem;
+}
+.imgTextItem div img {
+    width: 100%;
+    height: auto;
+}
+.imgTextItem div p {
+    padding: 1rem;
 }
