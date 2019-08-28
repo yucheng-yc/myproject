@@ -1,4 +1,13 @@
 @charset "UTF-8";
+@media screen and (min-width: 993px) {
+  /**
+    *轮播图文区
+    */
+  .imgTextItem div {
+    height: 359px; }
+  .imgTextItem div p {
+    height: 157px !important; } }
+
 /**
  *大屏 超大屏 的显示样式
  */
@@ -18,7 +27,14 @@
   .transBox div:first-child {
     width: 186px; }
   .transBox div:nth-child(2), .transBox div:last-child {
-    width: 248px; } }
+    width: 248px; }
+  /**
+        轮播图文区
+    */
+  .imgTextItem div {
+    height: 380px; }
+  .imgTextItem div p {
+    height: 209px; } }
 
 /**
  *小屏 中屏 的显示样式
@@ -57,7 +73,19 @@
   .transBox div {
     width: 80% !important; }
   .leftFont > p {
-    margin-bottom: 0px !important; } }
+    margin-bottom: 0px !important; }
+  /**
+    *轮播图文区
+    */
+  .imgTextItem {
+    flex-direction: column;
+    padding: 2rem 0px; }
+  .imgTextItem div {
+    width: 100% !important;
+    padding: 10px 1.5rem; }
+  .imgTextItem div img {
+    width: 100%;
+    height: auto; } }
 
 /**
  *超小屏的显示样式
@@ -108,7 +136,17 @@
   .photosItem div:last-child a:first-child {
     padding-left: 0px !important; }
   .photosItem div:nth-child(2) {
-    padding-bottom: 0.5rem !important; } }
+    padding-bottom: 0.5rem !important; }
+  /**
+    *轮播图文区
+    */
+  .imgTextItem {
+    flex-direction: column;
+    padding: 2rem 0px; }
+  .imgTextItem div {
+    width: 100% !important; }
+  .carouselImgText {
+    padding: 0px !important; } }
 
 /**
  *导航部分
@@ -366,9 +404,11 @@
 
 /*
 *轮播图文区
+    思路 屏幕四个尺寸 对应的高的值不一样
+    写四个媒体查询
 */
 .carouselImgText {
-  padding: 3rem;
+  padding: 3rem 0px;
   display: flex;
   justify-content: center; }
 
@@ -381,11 +421,11 @@
   align-items: center; }
 
 .imgTextItem {
-  display: flex; }
+  display: flex;
+  width: 100%; }
 
 .imgTextItem div {
   width: 25%;
-  height: auto;
   overflow: hidden;
   padding: 0 1rem; }
 
@@ -394,4 +434,11 @@
   height: auto; }
 
 .imgTextItem div p {
-  padding: 1rem; }
+  padding: 1.5rem 1rem;
+  font-size: 0.82rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background-color: #f7f7f7; }
+
+.bottom {
+  height: 300px; }
