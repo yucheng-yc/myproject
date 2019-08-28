@@ -270,6 +270,9 @@
     .carouselImgText {
         padding: 0px !important;
     }
+    .carouselItem h3{
+        font-size: 1.6em !important;
+    }
 
 }
 
@@ -615,8 +618,33 @@
     margin-bottom: 1rem;
     background-color: #f7f7f7;
 }
-
-
 .bottom {
     height: 300px;
 }
+
+/**
+*脚部部分
+*/
+.footer {
+    padding: 1rem 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.footer .footerItem{
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+}
+.footerItem div:first-child {
+    width: 35%;
+    height: 300px;
+}
+.footerItem div:nth-child(2) {
+    width: 35%;
+}
+.footerItem div:last-child {
+    width: 30%;
+}
+
