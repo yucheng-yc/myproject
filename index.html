@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="./css/com.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+    <script>
+        $(function(){
+            $(".toggle").click(
+                function(){
+                    $(".navRight").toggleClass("hide");
+                }
+            )
+        });    
+    </script>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -17,7 +27,7 @@
               <span>PET</span>
               <span>CLUB</span>
             </a>
-            <a href="#"><i class="fa fa-th-list fa-2x list-toggle"></i></a>
+            <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle"></i></a>
             <ul class="navRight">
                 <li><a href="#">HOME</a></li>
                 <li><a href="#">SERVER</a></li>
@@ -251,4 +261,5 @@
         <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
     </div>
 </body>
+
 </html>

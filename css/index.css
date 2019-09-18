@@ -470,3 +470,6 @@
 
 .footerItem div:last-child {
   width: 30%; }
+.hide {
+    display: none;
+}
