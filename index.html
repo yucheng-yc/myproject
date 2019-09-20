@@ -9,257 +9,319 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+    <script src="./js/vue.js"></script>
+    <style>
+
+    </style>
     <script>
+        //程序入口 设置DOMcontentLoaded
         $(function(){
-            $(".toggle").click(
-                function(){
-                    $(".navRight").toggleClass("hide");
+                // 创建vue对象 实现初始化工作
+                var vm=new Vue({
+                el:'.main',
+                data:{
+                    // 导航栏开关按钮
+                    navToggle:false,
+                    // 导航栏位置改变样式
+                    navbarLCg:{
+                        navbarLC:false
+                    },
+                    aColor:{
+                        color:''
+                    }
+                },
+                methods:{
+                    // nav开关
+                    navToggleFun(e){
+                        this.navToggle=!this.navToggle;
+                    }
+                },
+                watch:{
+
+                },
+                computed:{
+
                 }
-            )
-        });    
+            });
+
+            // 为浏览器添加事件 当窗口改变时 改变导航栏状态
+            window.onresize=function(e){
+                // 当屏幕尺寸是991以上的时候需要显示 否则需要隐藏
+
+                if($(document).innerWidth()>991){
+                    vm.navToggle=true;
+                }else{
+                    vm.navToggle=false;
+                }
+            }
+            // 同时当浏览器刚刚加载时 如果导航条不是最小屏幕 默认将导航条设置为显示
+            
+            vm.navToggle=$(document).innerWidth()<575?false:true;
+
+            // 当下拉网页时 导航栏 颜色改变 位置改变
+            window.onscroll=function(){
+                if($(document).innerWidth()<991&&$(document).innerWidth()>0) {
+                        vm.aColor.color='white';
+                }
+
+                if($(window).scrollTop()>0){  
+                    vm.navbarLCg.navbarLC=true;
+                }else{
+                    vm.navbarLCg.navbarLC=false;
+                }
+            }
+
+
+        });
+    
     </script>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <div class="navbar">
-        <div class="navCenter">
-            <a class="navLeft" href="#">
-              <span>PET</span>
-              <span>CLUB</span>
-            </a>
-            <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle"></i></a>
-            <ul class="navRight">
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">SERVER</a></li>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="#">PHOTOS</a></li>
-                <li><a href="#">BOOK&nbsp;NOW</a></li>
-                <li><a href="#">CONTACT</a></li>    
+    <div class="main">
+        <!-- 导航栏 -->
+        <div class="navbar" :class="navbarLCg">
+            <div class="navCenter">
+                <a class="navLeft" href="#">
+                <span>PET</span>
+                <span>CLUB</span>
+                </a>
+                <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
+                <ul class="navRight" v-show="navToggle">
+                    <li><a :style="aColor" href="#">HOME</a></li>
+                    <li><a :style="aColor" href="#">SERVER</a></li>
+                    <li><a :style="aColor" href="#">ABOUT</a></li>
+                    <li><a :style="aColor" href="#">PHOTOS</a></li>
+                    <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
+                    <li><a :style="aColor" href="#">CONTACT</a></li>    
+                </ul>
+            </div>
+        </div>
+
+        <!-- 轮播图 -->
+        <div class="banner">
+        <div class="bannerItem"> <img src="./images/1.jpg" alt="" class="bannerImg"></div>
+        </div>
+        <!-- 分区展示 -->
+        <div class="showZone">
+            <ul>
+                <li>
+                    <i class="fa fa-home fa-2x" style="color: rgb(0, 168, 224);"></i>
+                    <h6>PET ROOM</h6>
+                    <div class="line"></div>
+                    <p> Quia aperiam facilis quasi itaque odit nisi illum culpa doloremque?</p>
+                </li>
+                <li>
+                    <i class="fa fa-cubes fa-2x" style="color: rgb(0, 168, 224);"></i>
+                    <h6>BEST FOOD</h6>
+                    <div class="line"></div>
+                    <p>Lorem Quia aperiam facilis suscipit facilis est, odit nisi illum culpa doloremque?</p>
+                </li>
+                <li>
+                    <i class="fa fa-heart-o fa-2x" style="color: rgb(0, 168, 224);"></i>
+                    <h6>VETERINARIAN HELP</h6>
+                    <div class="line"></div>
+                    <p> Quia aperiam facilis quasi  odit nisi illum culpa doloremque?</p>
+                </li>
+                <li>
+                    <i class="fa fa-calendar fa-2x" style="color: rgb(0, 168, 224);"></i>
+                    <h6>EASY BOOKING</h6>
+                    <div class="line"></div>
+                    <p>Lorem ipsum facilis quasi itaque,suscipit facilis est,illum culpa doloremque?</p>
+                </li>
             </ul>
         </div>
-    </div>
-    <!-- 轮播图 -->
-    <div class="banner">
-       <div class="bannerItem"> <img src="./images/1.jpg" alt="" class="bannerImg"></div>
-    </div>
-    <!-- 分区展示 -->
-    <div class="showZone">
-        <ul>
-            <li>
-                <i class="fa fa-home fa-2x" style="color: rgb(0, 168, 224);"></i>
-                <h6>PET ROOM</h6>
-                <div class="line"></div>
-                <p> Quia aperiam facilis quasi itaque odit nisi illum culpa doloremque?</p>
-            </li>
-            <li>
-                <i class="fa fa-cubes fa-2x" style="color: rgb(0, 168, 224);"></i>
-                <h6>BEST FOOD</h6>
-                <div class="line"></div>
-                <p>Lorem Quia aperiam facilis suscipit facilis est, odit nisi illum culpa doloremque?</p>
-            </li>
-            <li>
-                <i class="fa fa-heart-o fa-2x" style="color: rgb(0, 168, 224);"></i>
-                <h6>VETERINARIAN HELP</h6>
-                <div class="line"></div>
-                <p> Quia aperiam facilis quasi  odit nisi illum culpa doloremque?</p>
-            </li>
-            <li>
-                <i class="fa fa-calendar fa-2x" style="color: rgb(0, 168, 224);"></i>
-                <h6>EASY BOOKING</h6>
-                <div class="line"></div>
-                <p>Lorem ipsum facilis quasi itaque,suscipit facilis est,illum culpa doloremque?</p>
-            </li>
-        </ul>
-    </div>
- 
-    <!-- 图文展示 -->
-    <div class="articleShow">
-        <div class="content">
-            <span>OUR</span>
-            <h3>SERVICES</h3>
+    
+        <!-- 图文展示 -->
+        <div class="articleShow">
+            <div class="content">
+                <span>OUR</span>
+                <h3>SERVICES</h3>
 
-            <div class="content-item">
-                <div class="content-item-detail">
-                    <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                    <div class="line"></div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                    <a href="#" class="btn">READ MORE</a>
-                </div>
-                <p class="content-item-img">
-                    <img src="./images/4.jpg" alt="waiting">
-                </p>
-            </div>
-            <div class="content-item">
-                    <p class="content-item-img">
-                        <img src="./images/5.jpg" alt="waiting">
-                    </p>
+                <div class="content-item">
                     <div class="content-item-detail">
-                            <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                            <div class="line"></div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                            <a href="#" class="btn">READ MORE</a>
-                     </div>
-            </div>
-
-            <div class="content-item">
-                <div class="content-item-detail">
-                    <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                    <div class="line"></div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                    <a href="#" class="btn">READ MORE</a>
-                </div>
-                <p class="content-item-img">
-                    <img src="./images/6.jpg" alt="waiting">
-                </p>
-            </div>
-            <div class="content-item">
+                        <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                        <div class="line"></div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                        <a href="#" class="btn">READ MORE</a>
+                    </div>
                     <p class="content-item-img">
-                        <img src="./images/7.jpg" alt="waiting">
+                        <img src="./images/4.jpg" alt="waiting">
                     </p>
+                </div>
+                <div class="content-item">
+                        <p class="content-item-img">
+                            <img src="./images/5.jpg" alt="waiting">
+                        </p>
+                        <div class="content-item-detail">
+                                <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                                <div class="line"></div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                                <a href="#" class="btn">READ MORE</a>
+                        </div>
+                </div>
+
+                <div class="content-item">
                     <div class="content-item-detail">
-                            <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                            <div class="line"></div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                            <a href="#" class="btn">READ MORE</a>
-                     </div>
-            </div>
-            
-
-
-        </div>
-    </div>
-
-    <!-- 透明背景栏 -->
-    <div class="transBg">
-        <div class="transBox">
-            <div class="leftFont">
-                <h5>WHO WE ARE</h5>
-                <p>
-                    ABOUT
-                    <br>
-                    OUR BLOG
-                </p>
-            </div>
-            <div class="centerFont">
-                <p>Lorem ipsum dolor sit amet Neque 
-                    porro quisquam est qui dolorem Lorem int
-                     ipsum dolor sit amet when an unknown printer..
-                </p>
-                <p>
-                    Maecenas interdum, metus vitae tincidunt porttitor,
-                     magna quam egestas sem, ac scelerisque nisl nibh vel
-                      lacus. Proin eget gravida odio. Donec ullamcorper est
-                     eu accumsan cursus.
-                </p>
-            </div>
-            <div class="rightFont">
-                <p>
-                    Maecenas interdum, 
-                    metus vitae tincidunt 
-                    porttitor, magna quam egestas sem,
-                    ac scelerisque nisl nibh vel lacus. Proin
-                    eget gravida odio. Donec ullamcorper est eu 
-                    accumsan cursus.
-                </p>
-                <a href="#" class="btn">READ MORE</a>
-            </div>
-        </div>
-    </div>
-    <!-- 图片集合 -->
-    <div class="photosBox">
-            <span>LATEST</span>
-            <h3>PHOTOS</h3>
-            <div class="photosItem">
-                <div>
-                    <a href=""><img src="./images/g1.jpg" alt=""></a>
-                    <a href=""><img src="./images/g2.jpg" alt=""></a>
+                        <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                        <div class="line"></div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                        <a href="#" class="btn">READ MORE</a>
+                    </div>
+                    <p class="content-item-img">
+                        <img src="./images/6.jpg" alt="waiting">
+                    </p>
                 </div>
-
-                <div>
-                    <a href="#"><img src="./images/g3.jpg" alt=""></a>
-                </div>
-
-                <div>
-                    <a href="#"><img src="./images/g4.jpg" alt=""></a>
+                <div class="content-item">
+                        <p class="content-item-img">
+                            <img src="./images/7.jpg" alt="waiting">
+                        </p>
+                        <div class="content-item-detail">
+                                <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                                <div class="line"></div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                                <a href="#" class="btn">READ MORE</a>
+                        </div>
                 </div>
                 
-                <div>
-                    <a href="#"><img src="./images/g5.jpg" alt=""></a>
-                    <a href="#"><img src="./images/g6.jpg" alt=""></a>
+
+
+            </div>
+        </div>
+
+        <!-- 透明背景栏 -->
+        <div class="transBg">
+            <div class="transBox">
+                <div class="leftFont">
+                    <h5>WHO WE ARE</h5>
+                    <p>
+                        ABOUT
+                        <br>
+                        OUR BLOG
+                    </p>
+                </div>
+                <div class="centerFont">
+                    <p>Lorem ipsum dolor sit amet Neque 
+                        porro quisquam est qui dolorem Lorem int
+                        ipsum dolor sit amet when an unknown printer..
+                    </p>
+                    <p>
+                        Maecenas interdum, metus vitae tincidunt porttitor,
+                        magna quam egestas sem, ac scelerisque nisl nibh vel
+                        lacus. Proin eget gravida odio. Donec ullamcorper est
+                        eu accumsan cursus.
+                    </p>
+                </div>
+                <div class="rightFont">
+                    <p>
+                        Maecenas interdum, 
+                        metus vitae tincidunt 
+                        porttitor, magna quam egestas sem,
+                        ac scelerisque nisl nibh vel lacus. Proin
+                        eget gravida odio. Donec ullamcorper est eu 
+                        accumsan cursus.
+                    </p>
+                    <a href="#" class="btn">READ MORE</a>
                 </div>
             </div>
-    </div>
+        </div>
+        <!-- 图片集合 -->
+        <div class="photosBox">
+                <span>LATEST</span>
+                <h3>PHOTOS</h3>
+                <div class="photosItem">
+                    <div>
+                        <a href=""><img src="./images/g1.jpg" alt=""></a>
+                        <a href=""><img src="./images/g2.jpg" alt=""></a>
+                    </div>
 
-    <!-- 重复透明背景栏 -->
-    <div class="transBg">
-        <div class="transBox">
-            <div class="" style="height: 100px"></div>
+                    <div>
+                        <a href="#"><img src="./images/g3.jpg" alt=""></a>
+                    </div>
+
+                    <div>
+                        <a href="#"><img src="./images/g4.jpg" alt=""></a>
+                    </div>
+                    
+                    <div>
+                        <a href="#"><img src="./images/g5.jpg" alt=""></a>
+                        <a href="#"><img src="./images/g6.jpg" alt=""></a>
+                    </div>
+                </div>
+        </div>
+
+        <!-- 重复透明背景栏 -->
+        <div class="transBg">
+            <div class="transBox">
+                <div class="" style="height: 100px"></div>
+            </div>
+        </div>
+
+        <!-- 轮播图文区 -->
+        <div class="carouselImgText">
+            <div class="carouselItem">
+                <span>CUSTOMER REVIEWS</span>
+                <h3>WHAT CLIENTS SAY</h3>
+                <div class="imgTextItem">
+                    <div>
+                        <img src="./images/5.jpg" alt="">
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                    </div>
+                    <div>
+                        <img src="./images/7.jpg" alt="">
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                    </div>
+                    <div>
+                        <img src="./images/4.jpg" alt="">
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                    </div>
+                    <div>
+                        <img src="./images/8.jpg" alt="">
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 联系我们 -->
+        <div class="transBg contactUs">
+            <div class="transBox">
+                <div class="leftFont">
+                    <h5>FIND US</h5>
+                    <p>
+                        CONTACT
+                        <br>
+                        US
+                    </p>
+                </div>
+                
+                <div class="rightFont">
+                    <p>
+                        Maecenas interdum, 
+                        metus vitae tincidunt 
+                        porttitor, magna quam egestas sem,
+                        ac scelerisque nisl nibh vel lacus. Proin
+                        eget gravida odio. Donec ullamcorper est eu 
+                        accumsan cursus.
+                    </p>
+                    <a href="#" class="btn">READ MORE</a>
+                </div>
+            </div>
+        </div>
+        <!-- 二级页面 -->
+
+
+        <!--脚部-->
+        <div class="footer">
+            <div class="footerItem">
+                <div><img src="./images/qq.jpg"></div>
+                <div><img src="./images/wx.png" alt="" srcset=""></div>
+                <div><img src="./images/zfb.jpg" alt="" srcset=""></div>
+            </div>
+            <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
         </div>
     </div>
 
-    <!-- 轮播图文区 -->
-    <div class="carouselImgText">
-        <div class="carouselItem">
-            <span>CUSTOMER REVIEWS</span>
-            <h3>WHAT CLIENTS SAY</h3>
-            <div class="imgTextItem">
-                <div>
-                    <img src="./images/5.jpg" alt="">
-                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                </div>
-                <div>
-                    <img src="./images/7.jpg" alt="">
-                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                </div>
-                <div>
-                    <img src="./images/4.jpg" alt="">
-                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                </div>
-                <div>
-                    <img src="./images/8.jpg" alt="">
-                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- 联系我们 -->
-    <div class="transBg contactUs">
-        <div class="transBox">
-            <div class="leftFont">
-                <h5>FIND US</h5>
-                <p>
-                    CONTACT
-                    <br>
-                    US
-                </p>
-            </div>
-            
-            <div class="rightFont">
-                <p>
-                    Maecenas interdum, 
-                    metus vitae tincidunt 
-                    porttitor, magna quam egestas sem,
-                    ac scelerisque nisl nibh vel lacus. Proin
-                    eget gravida odio. Donec ullamcorper est eu 
-                    accumsan cursus.
-                </p>
-                <a href="#" class="btn">READ MORE</a>
-            </div>
-        </div>
-    </div>
-    <!-- 二级页面 -->
-
-
-    <!--脚部-->
-    <div class="footer">
-        <div class="footerItem">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
-    </div>
 </body>
 
 </html>

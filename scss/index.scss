@@ -161,6 +161,11 @@
        width: 100%;
        height: auto;
     }
+
+    .footerItem>div>img {
+        width: 120px !important;
+        height: 120px !important;
+    }
     
 
 }
@@ -274,7 +279,18 @@
         font-size: 1.6em !important;
     }
 
+    .footerItem>div>img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+
 }
+
+
+
+
+// **************************************************公共部分**********************************************************
 
 
 /**
@@ -282,9 +298,21 @@
  */
 .navbar {
     padding: 1rem 0px;
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
+
+// 用来添加的类  改变位置状态
+.navbarLC {
+    top: 5rem;
+    background-color: white;
+}
+.navbarLC .navRight>li>a {
+    color: black;
+}
+
 .navCenter {
     display: flex;
     flex-wrap: wrap;
@@ -305,6 +333,13 @@
 //为右侧导航添加hover效果
 .navRight li:hover {
     border-bottom: 2px solid white;
+    color: rgb(0, 168, 224) !important;
+}
+.navRight li:hover a{
+    color: rgb(0, 168, 224) !important;
+}
+.navRight a {
+    color: white;
 }
 //设置行高垂直居中对齐
 .navRight li,.navLeft {
@@ -634,22 +669,14 @@
     background-color: #343a40;
 }
 .footer .footerItem{
-    width: 97%;
+    width: 60%;
     display: flex;
     justify-content: space-between;
+    padding: 120px 0px;
 }
-.footerItem div:first-child {
-    width: 35%;
-    height: 300px;
-}
-.footerItem div:nth-child(2) {
-    width: 35%;
-}
-.footerItem div:last-child {
-    width: 30%;
+.footerItem>div>img {
+    width: 200px;
+    height: 200px;
+    margin: 0 10px;
 }
 
-/* jquery 加功能时加的样式 */
-.hide {
-    display: none;
-}

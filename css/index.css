@@ -85,7 +85,10 @@
     padding: 10px 1.5rem; }
   .imgTextItem div img {
     width: 100%;
-    height: auto; } }
+    height: auto; }
+  .footerItem > div > img {
+    width: 120px !important;
+    height: 120px !important; } }
 
 /**
  *超小屏的显示样式
@@ -148,15 +151,27 @@
   .carouselImgText {
     padding: 0px !important; }
   .carouselItem h3 {
-    font-size: 1.6em !important; } }
+    font-size: 1.6em !important; }
+  .footerItem > div > img {
+    width: 100px !important;
+    height: 100px !important; } }
 
 /**
  *导航部分
  */
 .navbar {
   padding: 1rem 0px;
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: center; }
+
+.navbarLC {
+  top: 5rem;
+  background-color: white; }
+
+.navbarLC .navRight > li > a {
+  color: black; }
 
 .navCenter {
   display: flex;
@@ -174,7 +189,14 @@
   color: white; }
 
 .navRight li:hover {
-  border-bottom: 2px solid white; }
+  border-bottom: 2px solid white;
+  color: #00a8e0 !important; }
+
+.navRight li:hover a {
+  color: #00a8e0 !important; }
+
+.navRight a {
+  color: white; }
 
 .navRight li, .navLeft {
   height: 3rem;
@@ -457,19 +479,12 @@
   background-color: #343a40; }
 
 .footer .footerItem {
-  width: 97%;
+  width: 60%;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding: 120px 0px; }
 
-.footerItem div:first-child {
-  width: 35%;
-  height: 300px; }
-
-.footerItem div:nth-child(2) {
-  width: 35%; }
-
-.footerItem div:last-child {
-  width: 30%; }
-.hide {
-    display: none;
-}
+.footerItem > div > img {
+  width: 200px;
+  height: 200px;
+  margin: 0 10px; }
