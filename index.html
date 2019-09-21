@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="./css/com.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">  
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
     <script src="./js/vue.js"></script>
-    <style>
-
-    </style>
     <script>
         //程序入口 设置DOMcontentLoaded
         $(function(){
@@ -71,10 +70,45 @@
                 }
             }
 
+            // *******************swiper部分*******************************
+            var mySwiper=new Swiper('.swiper-container',{
+                // direction: 'vertical', // 垂直切换选项
+                loop: true, // 循环模式选项
+                
+                // 如果需要分页器
+                pagination: {
+                el: '.swiper-pagination',
+                dynamicBullets: true,
+                },
+                
+                // 如果需要前进后退按钮
+                navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+                },
+                
+                // 如果需要滚动条
+                scrollbar: {
+                el: '.swiper-scrollbar',
+                },
+                autoplay: true,
+                effect : 'fade',
+                // 图片由小变大效果 因为是背景图 不支持
+                // fadeEffect: {
+                //     crossFade: true,
+                // }
+            });
+            console.log(mySwiper);
+
+
 
         });
     
     </script>
+
+
+<style>
+</style>
 </head>
 <body>
     <div class="main">
@@ -98,9 +132,46 @@
         </div>
 
         <!-- 轮播图 -->
-        <div class="banner">
-        <div class="bannerItem"> <img src="./images/1.jpg" alt="" class="bannerImg"></div>
+        <div class="banner swiper-container">
+        <!-- <div class="bannerItem"> <img src="./images/1.jpg" alt="" class="bannerImg"></div> -->
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="bannerImg bannerImg1">
+                    <div class="imgContent">
+                        <h2>We'r Happy to Pamper1</h2>
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+                    </div>
+                </div>
+            </div>
+                <div class="swiper-slide"><div class="bannerImg bannerImg2">
+                    <div class="imgContent">
+                        <h2>We'r Happy to Pamper2</h2>
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+                    </div>
+                </div>
+            </div>
+                <div class="swiper-slide"><div class="bannerImg bannerImg3">
+                    <div class="imgContent">
+                        <h2>We'r Happy to Pamper3</h2>
+                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+                    </div>
+                </div>
+            </div>
+
+            ext install gbktoutf8
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination">
+            </div>
+            
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            
+            <!-- 如果需要滚动条 -->
+            <div class="swiper-scrollbar"></div>
         </div>
+
+
         <!-- 分区展示 -->
         <div class="showZone">
             <ul>

@@ -302,6 +302,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    z-index: 999;
 }
 
 // 用来添加的类  改变位置状态
@@ -371,14 +372,69 @@
  */
 
 .banner {
-    // height: 950px;
+    height: 920px;
     background-color: $fontOrange;
 }
+// 轮播图片
 .bannerImg {
-    width: 100%;
-    display: block;
+    height: 920px;
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center !important; 
+    position: relative;
+}
+.bannerImg1 {
+    background-image: url(../images/1.jpg);
+}
+.bannerImg2 {
+    background-image: url(../images/2.jpg);
+}
+.bannerImg3 {
+    background-image: url(../images/4.jpg);
 }
 
+// 轮播图片内的盒子 里面的内容盒子
+.imgContent {
+    position: absolute;
+    padding: 36px;
+    bottom: 0px;
+    left: 0px;
+    width: 43%;
+    background: $fontOrange;
+}
+.imgContent>h2 {
+    font-size: 36px;
+    line-height: 36px;
+    color: #fff;
+    font-weight: 800;
+    margin: 36px 0 18px 0;
+    text-shadow: 2px 2px 2px rgba(41, 41, 41, 0.26);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+
+}
+.imgContent>p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 12px;
+    letter-spacing: 7px;
+    color: #fff;
+}
+
+// 轮播图 分页自定义
+.swiper-pagination {
+    width: 25px;
+    z-index: 10;
+    bottom: 20px;
+    left: 50%;
+    bottom: 30px !important;
+    z-index: 20 !important;
+}
+.swiper-pagination>span {
+    width: 25px;
+    height: 25px;
+}
 
 
 /**
