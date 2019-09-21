@@ -62,13 +62,13 @@
                 // 先获取当前页面尺寸 然后再将背景baner设置为页面当前尺寸
                 $('.main').width($(document).innerWidth());
 
-
+                // 同时当浏览器刚刚加载时 如果导航条不是最小屏幕 默认将导航条设置为显示
+                    
+                vm.navToggle=$(document).innerWidth()<939?false:true;
 
 
             }
-            // 同时当浏览器刚刚加载时 如果导航条不是最小屏幕 默认将导航条设置为显示
-            
-            vm.navToggle=$(document).innerWidth()<939?false:true;
+   
             // 当下拉网页时 导航栏 颜色改变 位置改变
             window.onscroll=function(){
                 if($(document).innerWidth()>989) {
