@@ -1,0 +1,17 @@
+<div class="navbar" :class="navbarLCg">
+        <div class="navCenter">
+            <a class="navLeft" href="#">
+            <span>PET</span>
+            <span>CLUB</span>
+            </a>
+            <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
+            <ul class="navRight" v-show="navToggle">
+                <li><a :style="aColor" href="#">HOME</a></li>
+                <li><a :style="aColor" href="#">SERVER</a></li>
+                <li><a :style="aColor" href="#">ABOUT</a></li>
+                <li><a :style="aColor" href="#">PHOTOS</a></li>
+                <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
+                <li><a :style="aColor" href="#">CONTACT</a></li>    
+            </ul>
+        </div>
+    </div>

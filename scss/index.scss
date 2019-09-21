@@ -1,7 +1,6 @@
 @import "var";
 
-
-
+// ******************************main HOME页面******************
 @media screen and (min-width:993px) {
 
     /**
@@ -278,7 +277,7 @@
     .carouselItem h3{
         font-size: 1.6em !important;
     }
-
+    
     .footerItem>div>img {
         width: 100px !important;
         height: 100px !important;
@@ -436,6 +435,20 @@
     height: 25px;
 }
 
+
+// 轮播图下一页 上一页自定义
+.swBtn {
+    border: 2px solid white;
+    position: relative;
+}
+.swiper-button-prev.swBtn>i {
+    position: absolute;
+    right: 5px;
+}
+.swiper-button-next.swBtn>i {
+    position: absolute;
+    left: 5px;
+}
 
 /**
  *分区部分
@@ -688,6 +701,28 @@
     align-items: center;
 }
 
+// 自定义轮播图文区
+.carouselItem {
+    overflow: hidden !important;
+}
+.page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0px;
+
+}
+.page>span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 800;
+    background-color: orange;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    text-align: center;
+}
+
 .imgTextItem {
     display: flex;
     width: 100%;
@@ -698,7 +733,7 @@
     overflow: hidden;
     padding: 0 1rem;
 }
-.imgTextItem div img {
+.imgTextItem>div>img {
     width: 100%;
     height: auto;
 }
@@ -734,5 +769,18 @@
     width: 200px;
     height: 200px;
     margin: 0 10px;
+}
+
+
+
+
+// ************************************SERVER 页面***************************
+
+.server {
+    // background-image: url('../images/1.jpg');
+    // background-repeat: no-repeat;
+    width: 100px;
+    height: 800px;
+    color: black !important;
 }
 

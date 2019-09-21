@@ -12,12 +12,14 @@
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
     <script src="./js/vue.js"></script>
+
+    <script src="./js/ajaxObj.js"></script>
     <script>
         //程序入口 设置DOMcontentLoaded
         $(function(){
                 // 创建vue对象 实现初始化工作
                 var vm=new Vue({
-                el:'.main',
+                el:'#pageSwiper',
                 data:{
                     // 导航栏开关按钮
                     navToggle:false,
@@ -42,7 +44,9 @@
 
                 }
             });
-
+            
+            // 因为浏览器加载时也需要执行一次
+            vm.navToggle=$(document).innerWidth()<939?false:true;
             // 为浏览器添加事件 当窗口改变时 改变导航栏状态
             window.onresize=function(e){
                 // 当屏幕尺寸是991以上的时候需要显示 否则需要隐藏
@@ -52,15 +56,31 @@
                 }else{
                     vm.navToggle=false;
                 }
+
+                // 当将页面改为多页面滑动时 解决页面尺寸改变 背景baner不100%显示问题
+
+                // 先获取当前页面尺寸 然后再将背景baner设置为页面当前尺寸
+                $('.main').width($(document).innerWidth());
+
+
+
+
             }
             // 同时当浏览器刚刚加载时 如果导航条不是最小屏幕 默认将导航条设置为显示
             
-            vm.navToggle=$(document).innerWidth()<575?false:true;
-
+            vm.navToggle=$(document).innerWidth()<939?false:true;
             // 当下拉网页时 导航栏 颜色改变 位置改变
             window.onscroll=function(){
-                if($(document).innerWidth()<991&&$(document).innerWidth()>0) {
+                if($(document).innerWidth()>989) {
+                    if($(document).scrollTop()!==0){
+                        vm.aColor.color='black';
+                    }else if(vm.navToggle){
                         vm.aColor.color='white';
+                    }
+                    else{
+                        vm.aColor.color='white';
+                    }
+                        
                 }
 
                 if($(window).scrollTop()>0){  
@@ -73,12 +93,14 @@
             // *******************swiper部分*******************************
             var mySwiper=new Swiper('.swiper-container',{
                 // direction: 'vertical', // 垂直切换选项
+                direction : 'horizontal',
                 loop: true, // 循环模式选项
                 
                 // 如果需要分页器
                 pagination: {
-                el: '.swiper-pagination',
-                dynamicBullets: true,
+                    clickable: true,
+                    el: '.swiper-pagination',
+                    dynamicBullets: true,
                 },
                 
                 // 如果需要前进后退按钮
@@ -91,307 +113,409 @@
                 scrollbar: {
                 el: '.swiper-scrollbar',
                 },
-                autoplay: true,
+                speed:300,
+                autoplay: {
+                    delay:3000
+                },
                 effect : 'fade',
                 // 图片由小变大效果 因为是背景图 不支持
                 // fadeEffect: {
                 //     crossFade: true,
                 // }
             });
-            console.log(mySwiper);
 
+            // 创建一个图文轮播部分
+            var artImgSwiper=new Swiper('#content',{
+                direction : 'horizontal',
+                loop: true,          
+                pagination: {
+                    el: '.page',
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                    return '<span class="' + className + '">'+ '</span>';
+                    }
+                },
+                speed:300,
+                autoplay: {
+                    delay:3000
+                }
+            });
 
+            var pageSwiper=new Swiper('#pageSwiper',{
+                direction : 'horizontal',        
+            });
+
+            //******************** 服务模块的轮播项*********************
+            // 使用ajax将公共头部分加载Server页面模块
+            ajaxObj.getNavBar(
+                function(result){
+                    $(result).appendTo('.server');
+                }
+            );
 
         });
     
     </script>
 
-
-<style>
-</style>
 </head>
 <body>
-    <div class="main">
-        <!-- 导航栏 -->
-        <div class="navbar" :class="navbarLCg">
-            <div class="navCenter">
-                <a class="navLeft" href="#">
-                <span>PET</span>
-                <span>CLUB</span>
-                </a>
-                <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
-                <ul class="navRight" v-show="navToggle">
-                    <li><a :style="aColor" href="#">HOME</a></li>
-                    <li><a :style="aColor" href="#">SERVER</a></li>
-                    <li><a :style="aColor" href="#">ABOUT</a></li>
-                    <li><a :style="aColor" href="#">PHOTOS</a></li>
-                    <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
-                    <li><a :style="aColor" href="#">CONTACT</a></li>    
-                </ul>
-            </div>
-        </div>
-
-        <!-- 轮播图 -->
-        <div class="banner swiper-container">
-        <!-- <div class="bannerItem"> <img src="./images/1.jpg" alt="" class="bannerImg"></div> -->
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="bannerImg bannerImg1">
-                    <div class="imgContent">
-                        <h2>We'r Happy to Pamper1</h2>
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+    <div id="pageSwiper" style="overflow: auto">
+        <div class="swiper-wrapper">
+            <!-- 主页面的轮播项 -->
+            <div class="main swiper-slide" >
+                <!-- 导航栏 -->
+                <div class="navbar" :class="navbarLCg">
+                    <div class="navCenter">
+                        <a class="navLeft" href="#">
+                        <span>PET</span>
+                        <span>CLUB</span>
+                        </a>
+                        <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
+                        <ul class="navRight" v-show="navToggle">
+                            <li><a :style="aColor" href="#">HOME</a></li>
+                            <li><a :style="aColor" href="#">SERVER</a></li>
+                            <li><a :style="aColor" href="#">ABOUT</a></li>
+                            <li><a :style="aColor" href="#">PHOTOS</a></li>
+                            <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
+                            <li><a :style="aColor" href="#">CONTACT</a></li>    
+                        </ul>
                     </div>
                 </div>
-            </div>
-                <div class="swiper-slide"><div class="bannerImg bannerImg2">
-                    <div class="imgContent">
-                        <h2>We'r Happy to Pamper2</h2>
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
-                    </div>
-                </div>
-            </div>
-                <div class="swiper-slide"><div class="bannerImg bannerImg3">
-                    <div class="imgContent">
-                        <h2>We'r Happy to Pamper3</h2>
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
-                    </div>
-                </div>
-            </div>
 
-            ext install gbktoutf8
-            </div>
-            <!-- 如果需要分页器 -->
-            <div class="swiper-pagination">
-            </div>
-            
-            <!-- 如果需要导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            
-            <!-- 如果需要滚动条 -->
-            <div class="swiper-scrollbar"></div>
-        </div>
-
-
-        <!-- 分区展示 -->
-        <div class="showZone">
-            <ul>
-                <li>
-                    <i class="fa fa-home fa-2x" style="color: rgb(0, 168, 224);"></i>
-                    <h6>PET ROOM</h6>
-                    <div class="line"></div>
-                    <p> Quia aperiam facilis quasi itaque odit nisi illum culpa doloremque?</p>
-                </li>
-                <li>
-                    <i class="fa fa-cubes fa-2x" style="color: rgb(0, 168, 224);"></i>
-                    <h6>BEST FOOD</h6>
-                    <div class="line"></div>
-                    <p>Lorem Quia aperiam facilis suscipit facilis est, odit nisi illum culpa doloremque?</p>
-                </li>
-                <li>
-                    <i class="fa fa-heart-o fa-2x" style="color: rgb(0, 168, 224);"></i>
-                    <h6>VETERINARIAN HELP</h6>
-                    <div class="line"></div>
-                    <p> Quia aperiam facilis quasi  odit nisi illum culpa doloremque?</p>
-                </li>
-                <li>
-                    <i class="fa fa-calendar fa-2x" style="color: rgb(0, 168, 224);"></i>
-                    <h6>EASY BOOKING</h6>
-                    <div class="line"></div>
-                    <p>Lorem ipsum facilis quasi itaque,suscipit facilis est,illum culpa doloremque?</p>
-                </li>
-            </ul>
-        </div>
-    
-        <!-- 图文展示 -->
-        <div class="articleShow">
-            <div class="content">
-                <span>OUR</span>
-                <h3>SERVICES</h3>
-
-                <div class="content-item">
-                    <div class="content-item-detail">
-                        <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                        <div class="line"></div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                        <a href="#" class="btn">READ MORE</a>
-                    </div>
-                    <p class="content-item-img">
-                        <img src="./images/4.jpg" alt="waiting">
-                    </p>
-                </div>
-                <div class="content-item">
-                        <p class="content-item-img">
-                            <img src="./images/5.jpg" alt="waiting">
-                        </p>
-                        <div class="content-item-detail">
-                                <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                                <div class="line"></div>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                                <a href="#" class="btn">READ MORE</a>
+                <!-- 轮播图 -->
+                <div class="banner swiper-container">
+                <!-- <div class="bannerItem"> <img src="./images/1.jpg" alt="" class="bannerImg"></div> -->
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><div class="bannerImg bannerImg1">
+                            <div class="imgContent">
+                                <h2>We'r Happy to Pamper1</h2>
+                                <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+                            </div>
                         </div>
-                </div>
-
-                <div class="content-item">
-                    <div class="content-item-detail">
-                        <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                        <div class="line"></div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                        <a href="#" class="btn">READ MORE</a>
                     </div>
-                    <p class="content-item-img">
-                        <img src="./images/6.jpg" alt="waiting">
-                    </p>
-                </div>
-                <div class="content-item">
-                        <p class="content-item-img">
-                            <img src="./images/7.jpg" alt="waiting">
-                        </p>
-                        <div class="content-item-detail">
-                                <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
-                                <div class="line"></div>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
-                                <a href="#" class="btn">READ MORE</a>
+                        <div class="swiper-slide"><div class="bannerImg bannerImg2">
+                            <div class="imgContent">
+                                <h2>We'r Happy to Pamper2</h2>
+                                <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+                            </div>
                         </div>
-                </div>
-                
-
-
-            </div>
-        </div>
-
-        <!-- 透明背景栏 -->
-        <div class="transBg">
-            <div class="transBox">
-                <div class="leftFont">
-                    <h5>WHO WE ARE</h5>
-                    <p>
-                        ABOUT
-                        <br>
-                        OUR BLOG
-                    </p>
-                </div>
-                <div class="centerFont">
-                    <p>Lorem ipsum dolor sit amet Neque 
-                        porro quisquam est qui dolorem Lorem int
-                        ipsum dolor sit amet when an unknown printer..
-                    </p>
-                    <p>
-                        Maecenas interdum, metus vitae tincidunt porttitor,
-                        magna quam egestas sem, ac scelerisque nisl nibh vel
-                        lacus. Proin eget gravida odio. Donec ullamcorper est
-                        eu accumsan cursus.
-                    </p>
-                </div>
-                <div class="rightFont">
-                    <p>
-                        Maecenas interdum, 
-                        metus vitae tincidunt 
-                        porttitor, magna quam egestas sem,
-                        ac scelerisque nisl nibh vel lacus. Proin
-                        eget gravida odio. Donec ullamcorper est eu 
-                        accumsan cursus.
-                    </p>
-                    <a href="#" class="btn">READ MORE</a>
-                </div>
-            </div>
-        </div>
-        <!-- 图片集合 -->
-        <div class="photosBox">
-                <span>LATEST</span>
-                <h3>PHOTOS</h3>
-                <div class="photosItem">
-                    <div>
-                        <a href=""><img src="./images/g1.jpg" alt=""></a>
-                        <a href=""><img src="./images/g2.jpg" alt=""></a>
+                    </div>
+                        <div class="swiper-slide"><div class="bannerImg bannerImg3">
+                            <div class="imgContent">
+                                <h2>We'r Happy to Pamper3</h2>
+                                <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui dolorem</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <a href="#"><img src="./images/g3.jpg" alt=""></a>
+                    ext install gbktoutf8
                     </div>
-
-                    <div>
-                        <a href="#"><img src="./images/g4.jpg" alt=""></a>
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination">
                     </div>
                     
-                    <div>
-                        <a href="#"><img src="./images/g5.jpg" alt=""></a>
-                        <a href="#"><img src="./images/g6.jpg" alt=""></a>
+                    <!-- 如果需要导航按钮 -->
+                    <div class="swiper-button-prev swBtn">
+                        <i class="fa fa-chevron-left"></i>
+                    </div>
+                    <div class="swiper-button-next swBtn">
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                    
+                    <!-- 如果需要滚动条 -->
+                    <div class="swiper-scrollbar"></div>
+                </div>
+
+
+                <!-- 分区展示 -->
+                <div class="showZone">
+                    <ul>
+                        <li>
+                            <i class="fa fa-home fa-2x" style="color: rgb(0, 168, 224);"></i>
+                            <h6>PET ROOM</h6>
+                            <div class="line"></div>
+                            <p> Quia aperiam facilis quasi itaque odit nisi illum culpa doloremque?</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-cubes fa-2x" style="color: rgb(0, 168, 224);"></i>
+                            <h6>BEST FOOD</h6>
+                            <div class="line"></div>
+                            <p>Lorem Quia aperiam facilis suscipit facilis est, odit nisi illum culpa doloremque?</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-heart-o fa-2x" style="color: rgb(0, 168, 224);"></i>
+                            <h6>VETERINARIAN HELP</h6>
+                            <div class="line"></div>
+                            <p> Quia aperiam facilis quasi  odit nisi illum culpa doloremque?</p>
+                        </li>
+                        <li>
+                            <i class="fa fa-calendar fa-2x" style="color: rgb(0, 168, 224);"></i>
+                            <h6>EASY BOOKING</h6>
+                            <div class="line"></div>
+                            <p>Lorem ipsum facilis quasi itaque,suscipit facilis est,illum culpa doloremque?</p>
+                        </li>
+                    </ul>
+                </div>
+            
+                <!-- 图文展示 -->
+                <div class="articleShow">
+                    <div class="content">
+                        <span>OUR</span>
+                        <h3>SERVICES</h3>
+
+                        <div class="content-item">
+                            <div class="content-item-detail">
+                                <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                                <div class="line"></div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                                <a href="#" class="btn">READ MORE</a>
+                            </div>
+                            <p class="content-item-img">
+                                <img src="./images/4.jpg" alt="waiting">
+                            </p>
+                        </div>
+                        <div class="content-item">
+                                <p class="content-item-img">
+                                    <img src="./images/5.jpg" alt="waiting">
+                                </p>
+                                <div class="content-item-detail">
+                                        <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                                        <div class="line"></div>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                                        <a href="#" class="btn">READ MORE</a>
+                                </div>
+                        </div>
+
+                        <div class="content-item">
+                            <div class="content-item-detail">
+                                <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                                <div class="line"></div>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                                <a href="#" class="btn">READ MORE</a>
+                            </div>
+                            <p class="content-item-img">
+                                <img src="./images/6.jpg" alt="waiting">
+                            </p>
+                        </div>
+                        <div class="content-item">
+                                <p class="content-item-img">
+                                    <img src="./images/7.jpg" alt="waiting">
+                                </p>
+                                <div class="content-item-detail">
+                                        <h4>LOREM IPSUM DOLOR SIT AMET, ADIPISICING ELIT SEDC</h4>
+                                        <div class="line"></div>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod tempor incididunt..</p>
+                                        <a href="#" class="btn">READ MORE</a>
+                                </div>
+                        </div>
+                        
+
+
                     </div>
                 </div>
-        </div>
 
-        <!-- 重复透明背景栏 -->
-        <div class="transBg">
-            <div class="transBox">
-                <div class="" style="height: 100px"></div>
-            </div>
-        </div>
-
-        <!-- 轮播图文区 -->
-        <div class="carouselImgText">
-            <div class="carouselItem">
-                <span>CUSTOMER REVIEWS</span>
-                <h3>WHAT CLIENTS SAY</h3>
-                <div class="imgTextItem">
-                    <div>
-                        <img src="./images/5.jpg" alt="">
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                    </div>
-                    <div>
-                        <img src="./images/7.jpg" alt="">
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                    </div>
-                    <div>
-                        <img src="./images/4.jpg" alt="">
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
-                    </div>
-                    <div>
-                        <img src="./images/8.jpg" alt="">
-                        <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                <!-- 透明背景栏 -->
+                <div class="transBg">
+                    <div class="transBox">
+                        <div class="leftFont">
+                            <h5>WHO WE ARE</h5>
+                            <p>
+                                ABOUT
+                                <br>
+                                OUR BLOG
+                            </p>
+                        </div>
+                        <div class="centerFont">
+                            <p>Lorem ipsum dolor sit amet Neque 
+                                porro quisquam est qui dolorem Lorem int
+                                ipsum dolor sit amet when an unknown printer..
+                            </p>
+                            <p>
+                                Maecenas interdum, metus vitae tincidunt porttitor,
+                                magna quam egestas sem, ac scelerisque nisl nibh vel
+                                lacus. Proin eget gravida odio. Donec ullamcorper est
+                                eu accumsan cursus.
+                            </p>
+                        </div>
+                        <div class="rightFont">
+                            <p>
+                                Maecenas interdum, 
+                                metus vitae tincidunt 
+                                porttitor, magna quam egestas sem,
+                                ac scelerisque nisl nibh vel lacus. Proin
+                                eget gravida odio. Donec ullamcorper est eu 
+                                accumsan cursus.
+                            </p>
+                            <a href="#" class="btn">READ MORE</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <!-- 图片集合 -->
+                <div class="photosBox">
+                        <span>LATEST</span>
+                        <h3>PHOTOS</h3>
+                        <div class="photosItem">
+                            <div>
+                                <a href=""><img src="./images/g1.jpg" alt=""></a>
+                                <a href=""><img src="./images/g2.jpg" alt=""></a>
+                            </div>
 
-        <!-- 联系我们 -->
-        <div class="transBg contactUs">
-            <div class="transBox">
-                <div class="leftFont">
-                    <h5>FIND US</h5>
-                    <p>
-                        CONTACT
-                        <br>
-                        US
-                    </p>
+                            <div>
+                                <a href="#"><img src="./images/g3.jpg" alt=""></a>
+                            </div>
+
+                            <div>
+                                <a href="#"><img src="./images/g4.jpg" alt=""></a>
+                            </div>
+                            
+                            <div>
+                                <a href="#"><img src="./images/g5.jpg" alt=""></a>
+                                <a href="#"><img src="./images/g6.jpg" alt=""></a>
+                            </div>
+                        </div>
                 </div>
-                
-                <div class="rightFont">
-                    <p>
-                        Maecenas interdum, 
-                        metus vitae tincidunt 
-                        porttitor, magna quam egestas sem,
-                        ac scelerisque nisl nibh vel lacus. Proin
-                        eget gravida odio. Donec ullamcorper est eu 
-                        accumsan cursus.
-                    </p>
-                    <a href="#" class="btn">READ MORE</a>
+
+                <!-- 重复透明背景栏 -->
+                <div class="transBg">
+                    <div class="transBox">
+                        <div class="" style="height: 100px"></div>
+                    </div>
+                </div>
+
+                <!-- 轮播图文区 -->
+                <div class="carouselImgText">
+                    <div class="carouselItem" id="content">
+                        <span>CUSTOMER REVIEWS</span>
+                        <h3>WHAT CLIENTS SAY</h3>
+                        
+                        <div class="swiper-wrapper">
+                            <div class="imgTextItem swiper-slide">
+                                <div>
+                                    <img src="./images/5.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/7.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/4.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/8.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                            
+                            </div>
+                            <div class="imgTextItem swiper-slide">
+                                <div>
+                                    <img src="./images/5.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/7.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/4.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/8.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                            
+                            </div>
+                            <div class="imgTextItem swiper-slide">
+                                <div>
+                                    <img src="./images/5.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/7.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/4.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/8.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                            
+                            </div>
+                            <div class="imgTextItem swiper-slide">
+                                <div>
+                                    <img src="./images/5.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/7.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/4.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                                <div>
+                                    <img src="./images/8.jpg" alt="">
+                                    <p> Lorem ipsum dolor sit amet Neque porro quisquam est qui doloreman unknown printer took a galley of type.. </p>
+                                </div>
+                            
+                            </div>       
+                        </div>
+                        <div class="page"></div>
+                        
+                    </div>
+                    
+                </div>
+
+                <!-- 联系我们 -->
+                <div class="transBg contactUs">
+                    <div class="transBox">
+                        <div class="leftFont">
+                            <h5>FIND US</h5>
+                            <p>
+                                CONTACT
+                                <br>
+                                US
+                            </p>
+                        </div>
+                        
+                        <div class="rightFont">
+                            <p>
+                                Maecenas interdum, 
+                                metus vitae tincidunt 
+                                porttitor, magna quam egestas sem,
+                                ac scelerisque nisl nibh vel lacus. Proin
+                                eget gravida odio. Donec ullamcorper est eu 
+                                accumsan cursus.
+                            </p>
+                            <a href="#" class="btn">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 二级页面 -->
+
+
+                <!--脚部-->
+                <div class="footer">
+                    <div class="footerItem">
+                        <div><img src="./images/qq.jpg"></div>
+                        <div><img src="./images/wx.png" alt="" srcset=""></div>
+                        <div><img src="./images/zfb.jpg" alt="" srcset=""></div>
+                    </div>
+                    <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
                 </div>
             </div>
-        </div>
-        <!-- 二级页面 -->
-
-
-        <!--脚部-->
-        <div class="footer">
-            <div class="footerItem">
-                <div><img src="./images/qq.jpg"></div>
-                <div><img src="./images/wx.png" alt="" srcset=""></div>
-                <div><img src="./images/zfb.jpg" alt="" srcset=""></div>
+            <!-- 服务模块的轮播项 -->
+            <div class="server swiper-slide">
+               
             </div>
-            <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
         </div>
     </div>
-
 
 </body>
 
