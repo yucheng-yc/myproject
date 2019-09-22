@@ -128,9 +128,17 @@
                 },
                 // 当下拉网页时 导航栏 颜色改变 位置改变
                 scrollNavBarLCg(){
-                     vm.navbarLCg.navbarLC=$(window).scrollTop()>0?true:false;   
-                      
+                   vm.navbarLCg.navbarLC=$(window).scrollTop()>0?true:false;    
+                },
+                // 当页面改变  页面宽度跟着改变
+                scrollCgSvrImgHgt(){
+                    // 让图片一直是宽高是等比例
+                    $('.blockArticle>article').innerHeight($(document).innerWidth()/3);
+                    // 让ate1和ate2为长方形
+                    $('.ate1,.ate4').innerHeight(($(document).innerWidth()/3)*2);
+
                 } 
+
             }
 
             // 对轮播对象统一管理
@@ -166,11 +174,13 @@
             var vm=globalSeting.vm;
 
             // 使用ajax将公共头部分加载Server页面模块
+            /*
             ajaxObj.getNavBar(
                 function(result){
                     $(result).prependTo('.server');
                 }
             );
+            */
 
             // 对浏览器第一次加载进行配置
             objConfig.navToggleConfig();
@@ -191,7 +201,12 @@
             }
             
             window.onscroll=function(){
+                // 让Home页面 中导航栏 定位top=5rem
                 objConfig.scrollNavBarLCg();
+
+                // 让server页面内宽高等比列
+                objConfig.scrollCgSvrImgHgt();
+
             }
             
 
@@ -204,27 +219,28 @@
 </head>
 <body>
     <div id="pageSwiper" style="overflow: auto">
+        <!-- 导航栏 -->
+        <div class="navbar" :class="navbarLCg">
+            <div class="navCenter">
+                <a class="navLeft" href="#">
+                <span>PET</span>
+                <span>CLUB</span>
+                </a>
+                <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
+                <ul class="navRight" v-show="navToggle">
+                    <li><a :style="aColor" href="#">HOME</a></li>
+                    <li><a :style="aColor" href="#">SERVER</a></li>
+                    <li><a :style="aColor" href="#">ABOUT</a></li>
+                    <li><a :style="aColor" href="#">PHOTOS</a></li>
+                    <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
+                    <li><a :style="aColor" href="#">CONTACT</a></li>    
+                </ul>
+            </div>
+        </div>
+
         <div class="swiper-wrapper">
             <!-- 主页面的轮播项 -->
             <div class="main swiper-slide" >
-                <!-- 导航栏 -->
-                <div class="navbar" :class="navbarLCg">
-                    <div class="navCenter">
-                        <a class="navLeft" href="#">
-                        <span>PET</span>
-                        <span>CLUB</span>
-                        </a>
-                        <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
-                        <ul class="navRight" v-show="navToggle">
-                            <li><a :style="aColor" href="#">HOME</a></li>
-                            <li><a :style="aColor" href="#">SERVER</a></li>
-                            <li><a :style="aColor" href="#">ABOUT</a></li>
-                            <li><a :style="aColor" href="#">PHOTOS</a></li>
-                            <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
-                            <li><a :style="aColor" href="#">CONTACT</a></li>    
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- 轮播图 -->
                 <div class="banner swiper-container">
@@ -558,12 +574,92 @@
             <div class="server swiper-slide">
                 
                 <div class="serverContent">
-                    <header></header>
+                    <!-- 头部信息模块 -->
+                    <header class="introduction">
+                        <p>
+                            Hello I'm <strong>Yu cheng.</strong> 
+                            I am a student of 
+                            <a href="#">Engineering and Technology College of Chengdu University of Technology.</a>
+                        </p>
+                    </header>
                     <section>
-                        <article></article>
-                        <article></article>
-                        <article></article>
-                        <article></article>
+                        <!-- 块级文章模块 -->
+                        <div class="blockArticle">
+                            <article class="ate1">
+                                <a href="#">
+                                        <div class="imgBox"><img src="./images/pageImg/portfolio-2.jpg" alt=""></div>
+                                        <div class="artBox">
+                                            <p class="pct">
+                                                <span>IKEA Singapore</span>
+                                                    <br>
+                                                <span>Advertising, Graphic Design</span>
+                                            </p>
+                                            
+                                        </div>
+                                </a>
+                            </article>
+                            <article class="ate2">
+                                <a href="#">
+                                        <div class="imgBox"><img src="./images/pageImg/portfolio-1.jpg" alt=""></div>
+                                        <div class="artBox">
+                                            <p class="pct">
+                                                <span>Craft Tamale</span>
+                                                <br>
+                                                <span>Print, Branding</span>
+                                            </p>
+                                        </div>
+                                </a>
+                            </article>
+                            <article class="ate3">
+                                <a href="#">
+                                        <div class="artBox">
+                                            <p class="pct">
+                                                <span>Comuna</span>
+                                                <br>
+                                                <span>Branding, Graphic Design, Webdesign</span>
+                                            </p>
+                                        </div>
+                                        <div class="imgBox"><img src="./images/pageImg/portfolio-3.jpg" alt=""></div>
+                                </a>
+                            </article>
+                            <article class="ate4">
+                                <a href="#">
+                                        <div class="imgBox"><img src="./images/pageImg/portfolio-5.jpg" alt=""></div>
+                                        <div class="artBox">
+                                            <p class="pct">
+                                                <span>Wearetheshit</span>
+                                                <br>
+                                                <span>Webdesign, Advertising, Branding</span>
+                                            </p>
+                                        </div>
+                                </a>
+                            </article>
+                            <article class="ate5">
+                                <a href="#">
+                                        <div class="imgBox"><img src="./images/pageImg/portfolio-4.jpg" alt=""></div>
+                                        <div class="artBox">
+                                            <p class="pct">
+                                                <span>Nike 'Strawberry Lace' Pack</span>
+                                                <br>
+                                                <span>Graphic Design, Webdesign, Advertising</span>
+                                            </p>
+                                        </div>
+                                </a>
+                            </article>
+                            <article class="ate6">
+                                <a href="#">
+                                       
+                                        <div class="artBox">
+                                            <p class="pct">
+                                                <span>Chamba para Creativos</span>
+                                                <br>
+                                                <span>Branding, Packaging, UI/UX</span>
+                                            </p>
+                                        </div>
+                                        <div class="imgBox"><img src="./images/pageImg/portfolio-6.jpg" alt=""></div>
+                                </a>
+                            </article>
+                        </div>
                     </section>
                     <footer></footer>
                 </div>
