@@ -301,12 +301,13 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    z-index: 999;
+    z-index: 5;
 }
 
 // 用来添加的类  改变位置状态
 .navbarLC {
     top: 5rem;
+    left: 0px;
     background-color: white;
 }
 .navbarLC .navRight>li>a {
