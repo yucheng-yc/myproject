@@ -6,8 +6,8 @@
     /**
     *轮播图文区
     */
-    //超大屏359px的内容高度
-    //每块轮播的内容设置
+    // 超大屏359px的内容高度
+    // 每块轮播的内容设置
     .imgTextItem div {
         height: 359px;
     }
@@ -18,6 +18,8 @@
 /**
  *大屏 超大屏 的显示样式
  */
+
+
 @media screen and  (min-width: 992px) {
     
     //大屏隐藏按钮
@@ -67,7 +69,9 @@
 
     
     }
+   
     
+
 
 /**
  *小屏 中屏 的显示样式
@@ -172,6 +176,7 @@
 /**
  *超小屏的显示样式
  */
+
  @media (max-width: 575px) {
 
 
@@ -838,7 +843,7 @@ article .artBox,article .imgBox {
     width: 100%;
     height: 100%;
 }
-.artBox>p>span {
+.artBox>p>p {
     text-transform:uppercase;
     font-family: Righteous, helvetica, sans-serif;
     font-size: 16px;
@@ -855,25 +860,45 @@ article.ate1 div,article.ate4 div {
     height: 50%;
 }
 .pct {
-    text-align: center;
-    width: 100%;
-    margin-top: 50%;
-    transform: translate(0,-50%);
-    box-sizing: content-box;
-    padding: 0 20px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.5;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    text-align: center!important;
+    color: #585757;
+    overflow: hidden;
 }
-.pct>span:first-child {
-    // font-size: 36px;
-    font-size: 2.5em;
+.pct>h2 {
+    position: relative;
+    margin-bottom: 25px;
+    padding-bottom: 30px;
+    font-size: 30px;
+    color: #000000;
+    font-family: "hanskendrick";
+    font-weight: 600;
+    line-height: 1.5;
+    margin-top: 3rem;
+}
+.pct>h2::before {
+    position: absolute;
+    content: "";
+    height: 2px;
+    width: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0px;
+    background: #ababab;
+}
+.pct>p {
+    font-size: 1.5em;
     font-weight: 700;
-    line-height: 1.2em;
-    // margin-left: 65px;
+    line-height: 1.6;
+    padding: 1rem 5rem;
+    overflow: hidden;
 }
-.pct>span:last-child {
-    line-height: 3em;
-    font-size: 0.012em;
-    // margin-left: 65px;
-}
+
 
 
 // 画三角
@@ -919,4 +944,54 @@ article.ate1 div,article.ate4 div {
     left: 0;
     width: 0;
 }
+
+// 子页面的媒体查询
+// @media screen and (min-width:993px)
+//@media screen and  (min-width: 992px)
+// @media screen and  (min-width: 576px) and (max-width: 991px)
+// @media (max-width: 575px)
+
+
+// 中小屏
+ @media screen and  (min-width: 752px) and (max-width: 1409px) {
+    .pct>p {
+        font-size: 1.0em;
+        font-weight: 400;
+        line-height: 1.4;
+        padding: 10px 2rem;
+    }
+    .pct>h2 {
+        position: relative;
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        font-size: 15px;
+        color: #000000;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+
+ }
+
+
+//  超小屏
+ @media (max-width: 751px) {
+    .pct>p {
+        font-size: 1.0em;
+        font-weight: 400;
+        line-height: 1.4;
+        padding: 10px 2rem;
+    }
+    .pct>h2 {
+        position: relative;
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        font-size: 25px;
+        color: #000000;
+        font-family: "hanskendrick";
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+ }
 
