@@ -6,76 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/videoPage.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script> -->
 
-    <style>
+    <script>
 
-    .vjs-paused .vjs-big-play-button,.vjs-paused.vjs-has-started .vjs-big-play-button {
-            display: block;
-            }
+        // $(function(){
+        //     $.ajax({
+        //         url:'http://127.0.0.1:5500/pages/navBar.html',
+        //         type:'get',
+        //         success(result){
+        //             console.log(result);
+        //         }
+        //     })
+        // });
 
-    .video-js .vjs-big-play-button{
-        font-size: 2.5em;
-        line-height: 2.3em;
-        height: 2.5em;
-        width: 2.5em;
-        -webkit-border-radius: 2.5em;
-        -moz-border-radius: 2.5em;
-        border-radius: 2.5em;
-        background-color: #73859f;
-        background-color: rgba(115,133,159,.5);
-        border-width: 0.15em;
-        margin-top: -1.25em;
-        margin-left: -1.75em;
-    }
-    /* 中间的播放箭头 */
-    .vjs-big-play-button .vjs-icon-placeholder {
-        font-size: 1.63em;
-    }
-    /* 加载圆圈 */
-    .vjs-loading-spinner {
-        font-size: 2.5em;
-        width: 2em;
-        height: 2em;
-        border-radius: 1em;
-        margin-top: -1em;
-        margin-left: -1.5em;
-    }
-    .video-js.vjs-playing .vjs-tech {
-        pointer-events: auto;
-    }
-    .video-js .vjs-time-control{display:block;}
-    .video-js .vjs-remaining-time{display: none;} 
+            // 问题留存  跨域问题 使用jsonp 去看笔记 博客
+    </script>
 
-
-
-
-
-    .vedioPage>.videoContent {
-        height: 800px;
-    }
-    #video_1 {
-        width: 100%;
-        height: 100%;
-    }
-    .detail {
-        background-color: orange;
-        height: 200px;
-        padding: 0px 2rem;
-    }
-    </style>
 
 </head>
 <body>
 <div class="vedioPage">
-    <div class="videoContent">
-        <video id="video_1" class="video-js vjs-default-skin vjs-big-play-centered" 
-        controls preload="none" playsinline  poster="http://b-ssl.duitang.com/uploads/item/201707/19/20170719211350_4PnBt.jpeg">
-            <source src="http://www.170mv.com/tool/jiexi/ajax/pid/13293/vid/3373046.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div class="detail">
-
+    <div class="centerContent">
+        <div class="contentLeft">
+                <div class="videoTop"></div>
+                <div class="videoContent">
+                    <video id="video_1" class="video-js vjs-default-skin vjs-big-play-centered" 
+                    controls preload="none" playsinline  poster="http://pic1.win4000.com/wallpaper/2019-01-05/5c301a1656f51.jpg">
+                        <source src="http://www.170mv.com/tool/jiexi/ajax/pid/13293/vid/3373046.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="videoBotton"> </div>
+        </div>
+        <div class="contentRight"></div>
     </div>
 </div>
 
