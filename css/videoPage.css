@@ -49,12 +49,13 @@
 }
 
 /* vedioPage 页面内容设置 */
+
 .vedioPage {
     width: 100%;
-    padding-top: 0.9rem;
+    padding: 0.9rem 0px;
     display: flex;
     justify-content: center;
-    background: red url("../images/bg.jpg") no-repeat top center/cover;
+    background:#35333c;
 }
 .centerContent {
     width: 82%;
@@ -66,8 +67,7 @@
     position: relative;
     height: 100%;
     width: 75%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-radius: 15px;
     background: white;
 }
 .contentRight {
@@ -75,8 +75,8 @@
     width: 25%;
     height: 100%;
     margin-left: 0.8rem;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-radius: 15px;
+    overflow: hidden;
     background: white;
 }
 .videoTop {
@@ -86,6 +86,9 @@
     width: 100%;
     height: 96px;
     padding: 17px 24px 17px 17px;
+    background: #4d4843;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 .videoContent {
     position: absolute;
@@ -102,4 +105,80 @@
     left: 0px;
     width: 100%;
     height: 124px;
+    background: #4d4843;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.contentRight {
+    padding-top: 100px;
+}
+.contentUl {
+    list-style: none;
+    width: 100%;
+    height: 61%;
+    overflow: hidden;
+    font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif;
+}
+.tj {
+    height: 24px;
+    border-bottom: 6px;  
+    line-height: 1.5;
+    font-size: 17px;
+}
+.contentUl>li {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: hidden;
+    margin: 6px 0px;
+}
+.contentUl>li>.clsImg {
+    height: 100%;
+    width: 45%;
+    overflow: hidden;
+    background: url("/images/5.jpg") no-repeat top left/cover;
+}
+.contentUl>li>.clsArt {
+    width: 55%;
+    height: 100%;
+    padding: 0px 0.6rem;
+}
+p {
+    overflow: hidden;
+}
+.pTitle {
+    font-size: 14px;
+    height: 36px;
+    line-height: 18px;
+    margin-bottom: 6px;
+    color: rgb(34, 34, 34);
+}
+.pContent {
+    font-size: 12px;
+    line-height: 18px;
+    color: rgb(153, 153, 153);
+}
+.clsbfdm {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.bf,.dm {
+    width: 45%;
+    font-size: 12px;
+    line-height: 16px;
+    height: 16px;
+    color: rgb(153, 153, 153);
+}
+.contentRight>.bottom {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    height: 30%;
+    width: 100%;
+    background-color: orange;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background: url("/images/1.jpg") no-repeat top center/cover;
 }

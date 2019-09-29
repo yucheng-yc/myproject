@@ -6,25 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video-js.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/videoPage.css">
+    <link rel="stylesheet" href="/css/videoPage.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.3.0/video.min.js"></script>
-    <!-- <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script> -->
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/com.css">
 
     <script>
 
-        // $(function(){
-        //     $.ajax({
-        //         url:'http://127.0.0.1:5500/pages/navBar.html',
-        //         type:'get',
-        //         success(result){
-        //             console.log(result);
-        //         }
-        //     })
-        // });
-
-            // 问题留存  跨域问题 使用jsonp 去看笔记 博客
+        $(function(){
+            $.ajax({
+                url:'http://127.0.0.1:5500/pages/navBar.html',
+                type:'get',
+                success(result){
+                    $(result).prependTo(".vedioPage");
+                }
+            })
+        });
     </script>
-
+ 
 
 </head>
 <body>
@@ -34,13 +34,73 @@
                 <div class="videoTop"></div>
                 <div class="videoContent">
                     <video id="video_1" class="video-js vjs-default-skin vjs-big-play-centered" 
-                    controls preload="none" playsinline  poster="http://pic1.win4000.com/wallpaper/2019-01-05/5c301a1656f51.jpg">
-                        <source src="http://www.170mv.com/tool/jiexi/ajax/pid/13293/vid/3373046.mp4" type="video/mp4">
+                    controls preload="auto" playsinline  poster="http://pic1.win4000.com/wallpaper/2019-01-05/5c301a1656f51.jpg">
+                        <source src="https://cdn-oa-qcloud.jiahewushe.com/video/镁镁 4U_mux1987.mp4" type="video/mp4">
+                            <!-- 
+                                http://vd2.bdstatic.com/mda-jibbwk3v3efd76vi/sc/mda-jibbwk3v3efd76vi.mp4
+                            http://www.170mv.com/tool/jiexi/ajax/pid/13293/vid/3373046.mp4
+                            -->
                     </video>
                 </div>
-                <div class="videoBotton"> </div>
+                <div class="videoBotton"></div>
         </div>
-        <div class="contentRight"></div>
+        <div class="contentRight">
+            <div class="tj">相关推荐</div>
+            <ul class="contentUl">
+                <li>
+                    <div class="clsImg"></div>
+                    <div class="clsArt">
+                        <a href="#">
+                            <p class="pTitle">102位UP主花式演绎《我和我的祖国》</p>
+                        </a>
+                        <a href="#">
+                            <p class="pContent">不知道说啥</p>
+                        </a>
+                        <div class="clsbfdm"><div class="bf">9.6万播放</div>•<div class="dm">77万条弹幕</div></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="clsImg"></div>
+                    <div class="clsArt">
+                        <a href="#">
+                            <p class="pTitle">102位UP主花式演绎《我和我的祖国》</p>
+                        </a>
+                        <a href="#">
+                            <p class="pContent">不知道说啥</p>
+                        </a>
+                        <div class="clsbfdm"><div class="bf">9.6万播放</div>•<div class="dm">77万条弹幕</div></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="clsImg"></div>
+                    <div class="clsArt">
+                        <a href="#">
+                            <p class="pTitle">102位UP主花式演绎《我和我的祖国》</p>
+                        </a>
+                        <a href="#">
+                            <p class="pContent">不知道说啥</p>
+                        </a>
+                        <div class="clsbfdm"><div class="bf">9.6万播放</div>•<div class="dm">77万条弹幕</div></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="clsImg"></div>
+                    <div class="clsArt">
+                        <a href="#">
+                            <p class="pTitle">102位UP主花式演绎《我和我的祖国》</p>
+                        </a>
+                        <a href="#">
+                            <p class="pContent">不知道说啥</p>
+                        </a>
+                        <div class="clsbfdm"><div class="bf">9.6万播放</div>•<div class="dm">77万条弹幕</div></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="bottom">
+                
+            </div>
+        </div>
+
     </div>
 </div>
 
