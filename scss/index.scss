@@ -863,13 +863,17 @@
 
 .server {
     color: #263238;
-   
     background-image: url(../images/2.jpg);
     background-repeat:  no-repeat;
     background-size: cover;
-
-
 }
+// 清除浮动带来的影响
+.blockArticle::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
 // 头部信息模块
 .introduction {
     padding: 100px 200px;
@@ -1034,6 +1038,20 @@ article.ate1 div,article.ate4 div {
     width: 100%;
     height: 80%;
 }
+.serverContent {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.serverContent footer {
+    width: 100%;
+    background: orange url("../images/1.jpg") no-repeat center/cover;
+    clear: both;
+}
+
+
+
+
 
 // 子页面的媒体查询
 // @media screen and (min-width:993px)

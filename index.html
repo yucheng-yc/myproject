@@ -37,7 +37,9 @@
 
             // 对浏览器第一次加载进行配置
             objConfig.navToggleConfig();
-
+            
+            //对服务模块的轮播项高度进行配置
+            objConfig.computedHeight();
 
             // 为浏览器添加事件 当窗口改变时 改变导航栏状态
             window.onresize=function(e){
@@ -62,19 +64,17 @@
 
                 // 让home页面不同高度添加不同动画效果
                 objConfig.scrollAnimateCg();
+                
 
             }
-
-            
-            
-
-
         }
+
 
     
     </script>
+
 </head>
-<body>
+<body style="overflow: hidden;">
     <div id="pageSwiper" style="overflow: auto">
         <!-- 导航栏 -->
         <div class="navbar" :class="navbarLCg">
@@ -561,7 +561,9 @@
                             </article>
                         </div>
                     </section>    
-                    <footer></footer>
+                    <footer>
+                        <canvas></canvas>
+                    </footer>
                 </div>
             </div>
         </div>

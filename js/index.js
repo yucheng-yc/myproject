@@ -142,23 +142,19 @@ $(function(){
         },
         // 当页面滚动改变 不同的滚动位置添加不同动画
         scrollAnimateCg(){
-           var pageHeight=$(document).innerHeight();
+        // var pageHeight=$(document).innerHeight();
            var scrollTop=$(document).scrollTop();
-           console.log(pageHeight,scrollTop);
 
         //当屏幕滚动在400时 添加动画
         switch(scrollTop){
             case 450:
                 $(".showZone").addClass("animated slideInDown");
-                console.log(scrollTop);
                 break;
             case 400:
                 $(".showZone>ul>li:nth-child(0)").addClass("animated rubberBand");
-                console.log(scrollTop);
                 break;
             case 500:
                 $(".showZone>ul>li:nth-child(1)").addClass("animated headShake");
-                console.log(scrollTop);
                 break;
             case 550:
                 $(".showZone>ul>li:nth-child(1)").addClass("animated bounceInRight");
@@ -185,6 +181,13 @@ $(function(){
         }
        
         
+        },
+        computedHeight(){
+            // 错误原因 方法获取值范围错误 应该用outerHeight
+          var height=$(".main").outerHeight();
+        //   var section=$(".serverContent>section").outerHeight();
+        //   var header=$(".serverContent>header").outerHeight();
+          $(".server").css("height",`${height}`+'px');
         }
 
     }
