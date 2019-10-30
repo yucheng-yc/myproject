@@ -15,7 +15,32 @@ $(function(){
             })
         }
     }
- 
+    // 创建vue对象 实现初始化工作
+    var vm=new Vue({
+        el:'#pageSwiper',
+        data:{
+            // 导航栏开关按钮
+            navToggle:false,
+            // 导航栏位置改变样式
+            navbarLCg:{
+                navbarLC:false
+            },
+            // 导航栏a标签样式类
+            aColor:{
+                color:''
+            }
+        },
+        methods:{
+            // nav开关
+            navToggleFun(e){
+                this.navToggle=!this.navToggle;
+            }
+        },
+        watch:{
+
+        }
+    });
+
 
     // 首页轮播图
     var mySwiper=new Swiper('.swiper-container',{
@@ -119,7 +144,50 @@ $(function(){
         scrollAnimateCg(){
         // var pageHeight=$(document).innerHeight();
            var scrollTop=$(document).scrollTop();
+
+        //当屏幕滚动在400时 添加动画
+        switch(scrollTop){
+            case 450:
+                $(".showZone").addClass("animated slideInDown");
+                break;
+            case 400:
+                $(".showZone>ul>li:nth-child(0)").addClass("animated rubberBand");
+                break;
+            case 500:
+                $(".showZone>ul>li:nth-child(1)").addClass("animated headShake");
+                break;
+            case 550:
+                $(".showZone>ul>li:nth-child(1)").addClass("animated bounceInRight");
+                break;
+            case 1000:
+                $(".articleShow").addClass("animated wobble");
+                break;
+            case 2500:
+                $(".transBg").addClass("animated fadeIn");
+                break;
+            case 3100:
+                $(".photosBox").addClass("animated fadeInUpBig");
+                break;
+            case 4100:
+                $(".carouselImgText").addClass("animated flipInY");
+                break;
+            case 4800:
+                $(".transBox").addClass("animated rotateInDownRight");
+                break;
+            case 5200:
+                $(".contactUs").addClass("animated rotateOut");
+                break;
+
+        }
+       
         
+        },
+        computedHeight(){
+            // 错误原因 方法获取值范围错误 应该用outerHeight
+          var height=$(".main").outerHeight();
+        //   var section=$(".serverContent>section").outerHeight();
+        //   var header=$(".serverContent>header").outerHeight();
+          $(".server").css("height",`${height}`+'px');
         }
 
     }
@@ -141,4 +209,56 @@ $(function(){
 
 });
 
+
+// 页面中的内容
+window.onload=function(){
+            
+    // var ajaxObj=globalSeting.ajaxObj;
+    var objConfig=globalSeting.objConfig;
+
+    // 启动页面滚动延迟特效插件
+
+    // $("#pageSwiper").smoothScroll();
+
+    // 使用ajax将公共头部分加载Server页面模块
+    /*
+    ajaxObj.getNavBar(
+        function(result){
+            $(result).prependTo('.server');
+        }
+    );
+    */
+
+    // 对浏览器第一次加载进行配置
+    objConfig.navToggleConfig();
+    
+    //对服务模块的轮播项高度进行配置
+    // objConfig.computedHeight();
+
+    // 为浏览器添加事件 当窗口改变时 改变导航栏状态
+    window.onresize=function(e){
+
+        // 当屏幕尺寸是992以上的时候需要显示 否则需要隐藏
+        objConfig.navToggleConfig();
+
+        // 当页面尺寸改变 背景baner不100%显示问题
+        objConfig.ResizemainPageBanner();
+
+        // 当页面尺寸改变时 如果导航条大于中屏 默认将导航条设置为显示
+        objConfig.ResizeNavTg();
+
+    }
+
+    window.onscroll=function(){
+        // 让Home页面 中导航栏 定位top=5rem
+        objConfig.scrollNavBarLCg();
+
+        // 让server页面内宽高等比列
+        objConfig.scrollCgSvrImgHgt();
+
+        // 让home页面不同高度添加不同动画效果
+        objConfig.scrollAnimateCg();
+        
+    }
+}
 

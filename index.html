@@ -9,82 +9,23 @@
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-    <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
     <script src="https://unpkg.com/swiper/js/swiper.min.js"> </script>
     <script src="./js/smoothScroll.js"></script>
-    <script src="./js/vue.js"></script>
-    <script src="./js/index.js" ></script>
-    <script>
-        window.onload=function(){
-            var ajaxObj=globalSeting.ajaxObj;
-            var objConfig=globalSeting.objConfig;
-            var vm=globalSeting.vm;
 
-
-            // 启动页面滚动延迟特效插件
-
-            // $("#pageSwiper").smoothScroll();
-
-            // 使用ajax将公共头部分加载Server页面模块
-            /*
-            ajaxObj.getNavBar(
-                function(result){
-                    $(result).prependTo('.server');
-                }
-            );
-            */
-
-            // 对浏览器第一次加载进行配置
-            objConfig.navToggleConfig();
-            
-            //对服务模块的轮播项高度进行配置
-            objConfig.computedHeight();
-
-            // 为浏览器添加事件 当窗口改变时 改变导航栏状态
-            window.onresize=function(e){
-
-                // 当屏幕尺寸是992以上的时候需要显示 否则需要隐藏
-                objConfig.navToggleConfig();
-
-                // 当页面尺寸改变 背景baner不100%显示问题
-                objConfig.ResizemainPageBanner();
-
-                // 当页面尺寸改变时 如果导航条大于中屏 默认将导航条设置为显示
-                objConfig.ResizeNavTg();
-
-            }
-
-            window.onscroll=function(){
-                // 让Home页面 中导航栏 定位top=5rem
-                objConfig.scrollNavBarLCg();
-
-                // 让server页面内宽高等比列
-                objConfig.scrollCgSvrImgHgt();
-
-                // 让home页面不同高度添加不同动画效果
-                objConfig.scrollAnimateCg();
-                
-
-            }
-        }
-
-
-    
-    </script>
 
 </head>
 <body style="overflow: hidden;">
     <div id="pageSwiper" style="overflow: auto">
-        <!-- 导航栏 -->
-        <div class="navbar" :class="navbarLCg">
+        <!-- 导航栏 navbarLCg-->
+        <div class="navbar">
             <div class="navCenter">
                 <a class="navLeft" href="#">
                 <span>PET</span>
                 <span>CLUB</span>
                 </a>
-                <a href="#" class="toggle"><i class="fa fa-th-list fa-2x list-toggle" @click="navToggleFun"></i></a>
-                <ul class="navRight" v-show="navToggle">
+                <a href="javascript:;" class="toggle"><i class="fa fa-th-list fa-2x list-toggle"></i></a>
+                <ul class="navRight">
                     <li><a :style="aColor" href="#">HOME</a></li>
                     <li><a :style="aColor" href="#">SERVER</a></li>
                     <li><a :style="aColor" href="#">ABOUT</a></li>
@@ -440,135 +381,12 @@
                     <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
                 </div>
             </div>
-            <!-- 服务模块的轮播项 -->
-            <div class="server swiper-slide">
-                
-                <div class="serverContent">
-                    <!-- 头部信息模块 -->
-                    <header class="introduction">
-                        <p>
-                            Hello I'm <strong>Yu cheng.</strong> 
-                            I am a student of 
-                            <a href="#">Engineering and Technology College of Chengdu University of Technology.</a>
-                        </p>
-                    </header>
-                    <section>
-                        <!-- 块级文章模块 -->
-                        <div class="blockArticle">
-                            <article class="ate1">
-                                <a href="#">
-                                        <div class="imgBox"><img src="./images/pageImg/portfolio-2.jpg" alt=""></div>
-                                        <div class="artBox">
-                                            <div class="pct">
-                                                 <h2>IKEA Singapore</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur 
-                                                    adipisicing elit, sed do eiusmod tempor 
-                                                    incididunt ut labore et dolore magna aliqua. 
-                                                    Ut enim ad minim veniam, quis nostrud exercitation 
-                                                    ullamco laboris nisi ut aliquip ex ea commodo 
-                                                    consequat.
-                                                </p>
-                                            </div>
-                                            
-                                        </div>
-                                </a>
-                            </article>
-                            <article class="ate2">
-                                <a href="#">
-                                        <div class="imgBox"><img src="./images/pageImg/portfolio-1.jpg" alt=""></div>
-                                        <div class="artBox">
-                                            <div class="pct">
-                                                <h2>Print, Branding</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur 
-                                                    adipisicing elit, sed do eiusmod tempor 
-                                                    incididunt ut labore et dolore magna aliqua. 
-                                                    Ut enim ad minim veniam, quis nostrud exercitation 
-                                                    ullamco laboris nisi ut aliquip ex ea commodo 
-                                                    consequat.
-                                                </p>
-                                            </div>
-                                        </div>
-                                </a>
-                            </article>
-                            <article class="ate3">
-                                <a href="#">
-                                        <div class="artBox">
-                                            <div class="pct">
-                                                <h2>Charming Evening Field</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur 
-                                                    adipisicing elit, sed do eiusmod tempor 
-                                                    incididunt ut labore et dolore magna aliqua. 
-                                                    Ut enim ad minim veniam, quis nostrud exercitation 
-                                                    ullamco laboris nisi ut aliquip ex ea commodo 
-                                                    consequat.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="imgBox"><img src="./images/pageImg/portfolio-3.jpg" alt=""></div>
-                                </a>
-                            </article>
-                            <article class="ate4">
-                                <a href="#">
-                                        <div class="imgBox"><img src="./images/pageImg/portfolio-5.jpg" alt=""></div>
-                                        <div class="artBox">
-                                            <div class="pct">
-                                                <h2>Charming Evening Field</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur 
-                                                    adipisicing elit, sed do eiusmod tempor 
-                                                    incididunt ut labore et dolore magna aliqua. 
-                                                    Ut enim ad minim veniam, quis nostrud exercitation 
-                                                    ullamco laboris nisi ut aliquip ex ea commodo 
-                                                    consequat.
-                                                </p>
-                                            </div>
-                                        </div>
-                                </a>
-                            </article>
-                            <article class="ate5">
-                                <a href="#">
-                                        <div class="imgBox"><img src="./images/pageImg/portfolio-4.jpg" alt=""></div>
-                                        <div class="artBox">
-                                            <div class="pct">
-                                                 <h2>Charming Evening Field</h2>
-                                                 <p>Lorem ipsum dolor sit amet, consectetur 
-                                                    adipisicing elit, sed do eiusmod tempor 
-                                                    incididunt ut labore et dolore magna aliqua. 
-                                                    Ut enim ad minim veniam, quis nostrud exercitation 
-                                                    ullamco laboris nisi ut aliquip ex ea commodo 
-                                                    consequat.
-                                                </p>
-                                            </div>
-                                        </div>
-                                </a>
-                            </article>
-                            <article class="ate6">
-                                <a href="#">
-                                       
-                                        <div class="artBox">
-                                            <div class="pct">
-                                                <h2>Charming Evening Field</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur 
-                                                    adipisicing elit, sed do eiusmod tempor 
-                                                    incididunt ut labore et dolore magna aliqua. 
-                                                    Ut enim ad minim veniam, quis nostrud exercitation 
-                                                    ullamco laboris nisi ut aliquip ex ea commodo 
-                                                    consequat.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="imgBox"><img src="./images/pageImg/portfolio-6.jpg" alt=""></div>
-                                </a>
-                            </article>
-                        </div>
-                    </section>    
-                    <footer>
-                        <canvas></canvas>
-                    </footer>
-                </div>
-            </div>
         </div>
     </div>
-
+    <script src="./js/index1.js"></script>
+    <script>
+        var yc=new Yc(this);
+    </script>
 </body>
 
 </html>
