@@ -15,7 +15,7 @@
 
 
 </head>
-<body style="overflow: hidden;">
+<body>
     <div id="pageSwiper" style="overflow: auto">
         <!-- 导航栏 navbarLCg-->
         <div class="navbar">
@@ -24,14 +24,16 @@
                 <span>PET</span>
                 <span>CLUB</span>
                 </a>
-                <a href="javascript:;" class="toggle"><i class="fa fa-th-list fa-2x list-toggle"></i></a>
+                <a href="javascript:;" class="toggle">
+                    <i class="fa fa-th-list fa-2x list-toggle"></i>
+                </a>
                 <ul class="navRight">
-                    <li><a :style="aColor" href="#">HOME</a></li>
-                    <li><a :style="aColor" href="#">SERVER</a></li>
-                    <li><a :style="aColor" href="#">ABOUT</a></li>
-                    <li><a :style="aColor" href="#">PHOTOS</a></li>
-                    <li><a :style="aColor" href="#">BOOK&nbsp;NOW</a></li>
-                    <li><a :style="aColor" href="#">CONTACT</a></li>    
+                    <li><a  href="#">HOME</a></li>
+                    <li><a  href="#id_server">SERVER</a></li>
+                    <li><a  href="#id_about">ABOUT</a></li>
+                    <li><a  href="#id_photos">PHOTOS</a></li>
+                    <li><a  href="#id_book">BOOK&nbsp;NOW</a></li>
+                    <li><a  href="#id_footer">CONTACT</a></li>    
                 </ul>
             </div>
         </div>
@@ -119,7 +121,7 @@
                 <div class="articleShow">
                     <div class="content">
                         <span>OUR</span>
-                        <h3>SERVICES</h3>
+                        <h3 id="id_server">SERVICES</h3>
 
                        
                         <div class="content-item">
@@ -186,7 +188,7 @@
                 </div>
 
                 <!-- 透明背景栏 -->
-                <div class="transBg">
+                <div class="transBg" id="id_about">
                     <div class="transBox">
                         <div class="leftFont">
                             <h5>WHO WE ARE</h5>
@@ -222,7 +224,7 @@
                     </div>
                 </div>
                 <!-- 图片集合 -->
-                <div class="photosBox">
+                <div class="photosBox" id="id_photos">
                         <span>LATEST</span>
                         <h3>PHOTOS</h3>
                         <div class="photosItem">
@@ -344,7 +346,7 @@
                 </div>
 
                 <!-- 联系我们 -->
-                <div class="transBg contactUs">
+                <div class="transBg contactUs" id="id_book">
                     <div class="transBox">
                         <div class="leftFont">
                             <h5>FIND US</h5>
@@ -372,7 +374,7 @@
 
 
                 <!--脚部-->
-                <div class="footer">
+                <div class="footer" id="id_footer">
                     <div class="footerItem">
                         <div><img src="./images/qq.jpg"></div>
                         <div><img src="./images/wx.png" alt="" srcset=""></div>
