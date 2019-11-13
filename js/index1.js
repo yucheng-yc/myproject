@@ -89,6 +89,57 @@
         //     autoHeight: true,       
         // })
     }
+    // 轮播图索引
+    var i=0;
+    // li的宽度
+    var liWidth=197;
+    // li的数量
+    var liCount=10;
+    // 能否点击
+    var canClick=true;
+    // 轮播速度
+    var lisu=1000;
+
+    // 创建轮播图函数
+    Yc.prototype.moveTo=function(to){
+        // 当未传入值得时候
+        if(to===undefined){
+            to=i+1;
+        }
+        // 当最开始一张的时候
+        if(i==0){
+            if(to>i){
+                fImgBoxs.className='transition';
+            }
+            else{
+                fImgBoxs.className='';
+                fImgBoxs.style.marginLeft=-liWidth*liCount+'px';
+                setTimeout(() => {
+                    this.moveTo(liCount-1);
+                }, lisu+100);
+            }
+        }
+        // 进行图片li切换
+        i=to;
+        fImgBoxs.style.marginLeft=-liWidth*i+'px';
+        // 当最后一张的时候
+        if(i===liCount-5){
+            i=0;
+            setTimeout(() => {
+                fImgBoxs.className='';
+                fImgBoxs.style.marginLeft=0;
+            }, lisu);
+        }
+    }
+    Yc.prototype.move=function (n){
+        if(canClick){
+            this.moveTo(i+n);
+            canClick=false;
+            setTimeout(() => {
+                canClick=true;
+            }, lisu+100);
+        }
+    }
     // 将构造函数抛到全局
     window.Yc=Yc;
 }(window);

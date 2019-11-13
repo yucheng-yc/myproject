@@ -380,15 +380,83 @@
                         <div><img src="./images/wx.png" alt="" srcset=""></div>
                         <div><img src="./images/zfb.jpg" alt="" srcset=""></div>
                     </div>
+                    <div class="fBanner" id="fBanner">
+                        <ul class="fImgBoxs" id="fImgBoxs">
+                            <li><a href=""><img src="./images/f1.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f2.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f3.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f4.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f5.png" class="fImg"></a></li>
+    
+                            <li><a href=""><img src="./images/f1.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f2.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f3.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f4.png" class="fImg"></a></li>
+                            <li><a href=""><img src="./images/f5.png" class="fImg"></a></li>
+    
+                            <!-- 多一张是为了连接自然 -->
+                            <li><a href=""><img src="./images/f1.png"></a></li>
+                        </ul>
+                        <ul class="idxBoxs" id="idxBoxs"></ul>
+                    </div>
                     <div class="footerReg">Copyright © 2018.Company name All rights reserved.More Templates 余成 - Collect from 成理</div>
                 </div>
+
+                <!-- <div class="fBanner" id="fBanner">
+                    <ul class="fImgBoxs" id="fImgBoxs">
+                        <li><a href=""><img src="./images/f1.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f2.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f3.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f4.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f5.png" class="fImg"></a></li>
+
+                        <li><a href=""><img src="./images/f1.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f2.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f3.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f4.png" class="fImg"></a></li>
+                        <li><a href=""><img src="./images/f5.png" class="fImg"></a></li>
+
+                        <li><a href=""><img src="./images/f1.png"></a></li>
+                    </ul>
+                    <ul class="idxBoxs" id="idxBoxs"></ul>
+                </div> -->
             </div>
         </div>
     </div>
     <script src="./js/index1.js"></script>
     <script>
         var yc=new Yc(this);
+
+        setInterval(()=>{
+            yc.move(1);
+        },1000)
     </script>
+
+
+    <style>
+        .fBanner {
+            width: 80%;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        #fImgBoxs {
+            display: flex;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #fImgBoxs>li {
+            /* padding-right: 1rem; */
+            padding: .5rem 1rem 2rem 0;
+        }
+        .fImg {
+            width: 181px;
+            height: 46px;
+        }
+        .transition {
+            transition: .5s;
+        }
+    </style>
 </body>
 
 </html>
